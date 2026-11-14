@@ -47,7 +47,12 @@ async function main() {
   const config = await readJson('showcase.config.json');
   const raw = await readJson('data/repos.json');
   const site = config.site;
-  const originals = raw.repos.filter((r) => !r.isFork && !(config.hide || []).includes(r.name));
+  // 与 build.mjs 保持同一套筛选口径：去 fork、去隐藏、按 showArchived 决定是否收归档
+  const showArchived = config.showArchived !== false;
+  const hide = new Set(config.hide || []);
+  const originals = raw.repos.filter(
+    (r) => !r.isFork && !hide.has(r.name) && (showArchived || !r.isArchived),
+  );
   const repo = (n) => originals.find((r) => r.name === n);
 
   const descOf = (r, en) => {

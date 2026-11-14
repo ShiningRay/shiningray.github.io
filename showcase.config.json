@@ -169,8 +169,7 @@
         "swim",
         "hash_ring",
         "distributed-kv",
-        "kv",
-        "exchange_engine"
+        "kv"
       ],
       "nameEn": "Distributed & concurrency",
       "blurbEn": "Virtual actors, consistent hashing, SWIM failure detection, distributed KV — a long practice in shared-nothing."
@@ -187,7 +186,6 @@
         "bcs-ruby",
         "grpc-ws-bridge",
         "artela-throttle-aspect",
-        "patents",
         "account_service-client"
       ],
       "nameEn": "Blockchain & trading",
@@ -200,24 +198,12 @@
       "repos": [
         "super_cache",
         "select-pasted",
-        "blinger",
         "teapoy2",
         "miniforth",
-        "chats",
-        "natatorium",
         "hypergrid",
         "socket.io-rpc",
         "MoreFun",
-        "static-caching-proxy",
-        "reel-proxy",
-        "node-sockjs-proxy",
-        "chatroom-ruby",
-        "chatroom-models",
-        "firstgold",
-        "webgame",
         "hashchain",
-        "ethAddress",
-        "myproxy",
         "pichuli",
         "alias_fallback"
       ],
@@ -242,8 +228,11 @@
       "descriptionEn": "Troupe.rb — a Virtual Actor framework (Ruby port of Troupe.js, Orleans / Orbit ideas, zero gem dependencies)."
     }
   },
-  "hide": [],
-  "showArchived": true,
+  "hide": [
+    "shiningray.github.io",
+    "ShiningRay"
+  ],
+  "showArchived": false,
   "i18n": {
     "zh": {
       "eyebrow": "个人展示柜",
