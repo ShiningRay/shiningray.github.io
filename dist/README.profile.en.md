@@ -4,13 +4,15 @@
 
 [GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [Showcase](https://shiningray.github.io/?lang=en) · 中文版本 → [README.md](README.md)
 
-`57 original repos` · `66 stars` · `10 languages`
+`50 original repos` · `58 stars` · `8 languages`
 
 **Now playing** · Genshin Impact / Honkai: Star Rail / Zenless Zone Zero
 
 **Core stack** · Ruby · Rails · TypeScript · JavaScript
 
 **Written** · Professional JavaScript for Web Developers (Co-translator · Editions 1, 2 & 3)
+
+**Education** · Southeast University · School of Software · Software Engineering · 2002 — 2006 (FIRST INTAKE)
 
 ## Featured
 
@@ -43,23 +45,22 @@
 
 **Distributed & concurrency** — Virtual actors, consistent hashing, SWIM failure detection, distributed KV — a long practice in shared-nothing.
 
-[troupe](https://github.com/ShiningRay/troupe) · [troupe-elixir](https://github.com/ShiningRay/troupe-elixir) · [troupe-bench-suite](https://github.com/ShiningRay/troupe-bench-suite) · [ruby-virtual-actor](https://github.com/ShiningRay/ruby-virtual-actor) · [ratatoskr](https://github.com/ShiningRay/ratatoskr) · [swim](https://github.com/ShiningRay/swim) · [hash_ring](https://github.com/ShiningRay/hash_ring) · [distributed-kv](https://github.com/ShiningRay/distributed-kv) · [kv](https://github.com/ShiningRay/kv)
+[troupe](https://github.com/ShiningRay/troupe) · [troupe-elixir](https://github.com/ShiningRay/troupe-elixir) · [troupe-bench-suite](https://github.com/ShiningRay/troupe-bench-suite) · [ruby-virtual-actor](https://github.com/ShiningRay/ruby-virtual-actor) · [ratatoskr](https://github.com/ShiningRay/ratatoskr) · [swim](https://github.com/ShiningRay/swim) · [hash_ring](https://github.com/ShiningRay/hash_ring) · [distributed-kv](https://github.com/ShiningRay/distributed-kv)
 
-**Blockchain & trading** — Matching engines, JSON-RPC proxies, Riva speech proxy, BCS serialization, on-chain contracts.
+**Blockchain & trading** — Trading tools, JSON-RPC proxies, Riva speech proxy, BCS serialization, on-chain contracts.
 
-[ethproxy](https://github.com/ShiningRay/ethproxy) · [exchange-nodejs](https://github.com/ShiningRay/exchange-nodejs) · [riva-proxy-rb](https://github.com/ShiningRay/riva-proxy-rb) · [riva-proxy-go](https://github.com/ShiningRay/riva-proxy-go) · [bcs-ruby](https://github.com/ShiningRay/bcs-ruby) · [grpc-ws-bridge](https://github.com/ShiningRay/grpc-ws-bridge) · [artela-throttle-aspect](https://github.com/ShiningRay/artela-throttle-aspect) · [account_service-client](https://github.com/ShiningRay/account_service-client)
+[ethproxy](https://github.com/ShiningRay/ethproxy) · [riva-proxy-rb](https://github.com/ShiningRay/riva-proxy-rb) · [riva-proxy-go](https://github.com/ShiningRay/riva-proxy-go) · [bcs-ruby](https://github.com/ShiningRay/bcs-ruby) · [grpc-ws-bridge](https://github.com/ShiningRay/grpc-ws-bridge) · [artela-throttle-aspect](https://github.com/ShiningRay/artela-throttle-aspect) · [account_service-client](https://github.com/ShiningRay/account_service-client)
 
-**Early work · 2013–2018** — Rails middleware, an Atom plugin, a Forth interpreter, web games — kept as fossils.
+**Early work · 2013–2018** — Rails middleware, web games — kept as fossils.
 
-[super_cache](https://github.com/ShiningRay/super_cache) · [select-pasted](https://github.com/ShiningRay/select-pasted) · [teapoy2](https://github.com/ShiningRay/teapoy2) · [miniforth](https://github.com/ShiningRay/miniforth) · [hypergrid](https://github.com/ShiningRay/hypergrid) · [socket.io-rpc](https://github.com/ShiningRay/socket.io-rpc) · [MoreFun](https://github.com/ShiningRay/MoreFun) · [hashchain](https://github.com/ShiningRay/hashchain) · [pichuli](https://github.com/ShiningRay/pichuli) · [alias_fallback](https://github.com/ShiningRay/alias_fallback)
+[super_cache](https://github.com/ShiningRay/super_cache) · [teapoy2](https://github.com/ShiningRay/teapoy2) · [MoreFun](https://github.com/ShiningRay/MoreFun) · [hashchain](https://github.com/ShiningRay/hashchain) · [pichuli](https://github.com/ShiningRay/pichuli)
 
 <details>
-<summary>All 57 original repositories</summary>
+<summary>All 50 original repositories</summary>
 
 - [MoreFun](https://github.com/ShiningRay/MoreFun)
 - [account_service-client](https://github.com/ShiningRay/account_service-client) — Or install it yourself as:
 - [accountant](https://github.com/ShiningRay/accountant) — Or install it yourself as:
-- [alias_fallback](https://github.com/ShiningRay/alias_fallback) — fallback to another method when encounter nil
 - [artela-throttle-aspect](https://github.com/ShiningRay/artela-throttle-aspect) — Throttle Aspect for Artela Blockchain
 - [bcs-ruby](https://github.com/ShiningRay/bcs-ruby) — This Ruby gem provides an implementation of Binary Canonical Serialization (BCS), a serialization format used in blockchain applications like Move language. BCS provides…
 - [beryl](https://github.com/ShiningRay/beryl) — Beryl：Citrine 信号内核之上的桌面式 UI 组件库——窗口管理器、菜单、任务栏与控件目录
@@ -78,15 +79,11 @@
 - [emerald-calc](https://github.com/ShiningRay/emerald-calc) — 第一个第三方 Emerald App：科学计算器。纯 Ruby 组件（Citrine 信号内核 + Beryl 组件库 + Emerald 应用框架），经 Opal 编译运行在浏览器 / macOS 桌面。
 - [emerald-zui](https://github.com/ShiningRay/emerald-zui) — Emerald OS 的 ZUI（缩放式界面）扩展——无限画布、窗口即图标（同一对象两种形态）、相机导航与小地图；citrine/beryl/emerald 之上的范式实验
 - [ethproxy](https://github.com/ShiningRay/ethproxy) — Ethereum JSON-RPC reverse proxy: multi-upstream failover, sync-aware health checks and tiered caching
-- [exchange-nodejs](https://github.com/ShiningRay/exchange-nodejs)
 - [gemvault](https://github.com/ShiningRay/gemvault) — Crystal RubyGems registry: architecture and implementation roadmap
 - [grpc-ws-bridge](https://github.com/ShiningRay/grpc-ws-bridge) — 一个基于 Node.js 的 WebSocket ↔ gRPC 代理，支持 unary、server streaming、client streaming、bidirectional streaming 四种调用方式。前端通过 WebSocket 与该代理通信，代理再与后端 gRPC 服务交互。
 - [hash_ring](https://github.com/ShiningRay/hash_ring) — 一个灵活的 Ruby 一致性哈希实现，支持自定义哈希函数和可配置的虚拟节点。
 - [hashchain](https://github.com/ShiningRay/hashchain)
-- [hypergrid](https://github.com/ShiningRay/hypergrid)
 - [jsondb-rb](https://github.com/ShiningRay/jsondb-rb) — JSON file as database, in Ruby. 零依赖，MongoDB-lite 查询，原子落盘。require 'jsondb' → JsonDb
-- [kv](https://github.com/ShiningRay/kv)
-- [miniforth](https://github.com/ShiningRay/miniforth) — my naive forth implementation
 - [mrb.cr](https://github.com/ShiningRay/mrb.cr) — Thin, explicit Crystal bindings for mruby 4.x
 - [pichuli](https://github.com/ShiningRay/pichuli) — Batch processing for duplicate background jobs
 - [ratatoskr](https://github.com/ShiningRay/ratatoskr) — Lightweight virtual actors for node.js
@@ -95,8 +92,6 @@
 - [riva-proxy-rb](https://github.com/ShiningRay/riva-proxy-rb) — A Ruby client library for NVIDIA Riva Automatic Speech Recognition (ASR) service with built-in mock server for testing.
 - [ruby-virtual-actor](https://github.com/ShiningRay/ruby-virtual-actor)
 - [rubycog](https://github.com/ShiningRay/rubycog) — A tiny RubyLLM agent with one eval tool and a terminal UI
-- [select-pasted](https://github.com/ShiningRay/select-pasted) — Atom plugin: select the text you just pasted.
-- [socket.io-rpc](https://github.com/ShiningRay/socket.io-rpc)
 - [super_cache](https://github.com/ShiningRay/super_cache) — The lightweight Rails cache middleware from 2013 — still my most starred repo.
 - [swim](https://github.com/ShiningRay/swim) — A robust implementation of the SWIM (Scalable Weakly-consistent Infection-style Process Group Membership) protocol in Ruby, designed for building reliable distributed…
 - [teapoy2](https://github.com/ShiningRay/teapoy2) — 博聆是是一个类似论坛性质得网友讨论得web应用 版权归 曹力（ShiningRay）所有

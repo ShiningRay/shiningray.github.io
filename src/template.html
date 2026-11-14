@@ -218,6 +218,19 @@ section{margin-top:clamp(46px,7vw,84px)}
 .wmeta{margin-top:11px;font:500 10.5px/1.6 var(--mono);letter-spacing:.04em;color:var(--dim)}
 .wmeta b{font-weight:700;color:var(--muted)}
 
+/* 来历 */
+.origin{margin-top:34px}
+.ocard{position:relative;display:flex;align-items:flex-start;gap:15px;padding:19px 20px 18px;background:var(--panel);border:2px solid var(--line);box-shadow:4px 4px 0 var(--shadow)}
+.oseal{flex:none;width:54px;height:54px;display:grid;place-items:center;background:var(--c);box-shadow:inset 0 0 0 2px var(--shadow);line-height:0}
+.obody{flex:1;min-width:0;padding-right:104px}
+.ocard h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:9px;margin:0;font:700 19px/1.35 var(--sans);letter-spacing:-.01em}
+.oen{font:500 11px/1.4 var(--mono);letter-spacing:.05em;color:var(--muted);text-transform:none}
+.oline{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-top:10px;font:500 12px/1.5 var(--mono);letter-spacing:.04em;color:var(--muted)}
+.oyears{font-weight:700;color:var(--ink)}
+.onote{margin-top:12px;padding-left:11px;border-left:3px solid var(--c);font-size:13.5px;line-height:1.7;color:var(--dim)}
+.obadge{position:absolute;right:0;top:0;padding:6px 10px;background:var(--c);color:#12101c;font:700 10px/1 var(--mono);letter-spacing:.14em}
+@media(max-width:640px){.ocard{padding:16px 15px 15px;gap:12px}.oseal{width:44px;height:44px}.obody{padding-right:0}.obadge{position:static;display:inline-block;margin-bottom:10px;order:-1}.ocard{flex-wrap:wrap}.obadge{order:2}}
+
 /* ============ featured ============ */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .fcard{
@@ -479,6 +492,14 @@ section{margin-top:clamp(46px,7vw,84px)}
     <div class="wcards" id="wcards"></div>
   </section>
 
+  <section class="origin" id="origin">
+    <div class="sec-head">
+      <h2 data-t="origin"></h2>
+      <span class="sec-line"></span>
+    </div>
+    <div id="ocard"></div>
+  </section>
+
   <section id="projects">
     <div class="sec-head">
       <h2 data-t="projects"></h2>
@@ -680,6 +701,28 @@ const DATA = /*__DATA__*/ null;
       .join('');
   }
 
+/* ---------- 来历 ---------- */
+  const SEAL = '<svg viewBox="0 0 16 16" width="26" height="26" shape-rendering="crispEdges" aria-hidden="true" fill="#12101c"><rect x="1" y="5" width="14" height="1"/><rect x="1" y="10" width="14" height="1"/><rect x="1" y="5" width="1" height="6"/><rect x="14" y="5" width="1" height="6"/><rect x="7" y="5" width="2" height="6"/></svg>';
+
+  function paintOrigin() {
+    const o = D.origin;
+    $('#origin').hidden = !o;
+    if (!o) { $('#ocard').innerHTML = ''; return; }
+    const sub = lang === 'en' ? o.school : o.schoolEn || '';
+    const html = [
+      '<article class="ocard" style="--c:' + esc(o.color || '#5ce1e6') + '">',
+      '  <span class="oseal" aria-hidden="true">' + SEAL + '</span>',
+      '  <div class="obody">',
+      '    <h3>' + esc(L(o, 'school')) + '<span class="oen">' + esc(sub) + '</span></h3>',
+      '    <div class="oline"><span>' + esc(L(o, 'major')) + '</span><b class="oyears">' + esc(o.years || '') + '</b></div>',
+      '    <div class="onote">' + esc(L(o, 'note')) + '</div>',
+      '  </div>',
+      '  <span class="obadge">' + esc(L(o, 'badge')) + '</span>',
+      '</article>',
+    ].join('\n');
+    $('#ocard').innerHTML = html;
+  }
+
 /* ---------- 曾经（已下线） ---------- */
   function paintLegacy() {
     const list = D.legacy || [];
@@ -868,6 +911,7 @@ const DATA = /*__DATA__*/ null;
     paintStack();
     paintGames();
     paintWritings();
+    paintOrigin();
     paintLegacy();
     paintStats();
     paintControls();
@@ -935,6 +979,7 @@ const DATA = /*__DATA__*/ null;
   paintStack();
   paintGames();
   paintWritings();
+  paintOrigin();
   paintLegacy();
   paintStats();
   paintControls();

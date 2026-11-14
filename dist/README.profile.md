@@ -4,13 +4,15 @@
 
 [GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [作品集](https://shiningray.github.io/) · English version → [README.en.md](README.en.md)
 
-`57 个原创仓库` · `66 stars` · `10 种语言`
+`50 个原创仓库` · `58 stars` · `8 种语言`
 
 **在玩** · 原神 / 崩坏：星穹铁道 / 绝区零
 
 **主力技术** · Ruby · Rails · TypeScript · JavaScript
 
 **写过 · 译过** · JavaScript 高级程序设计（译者之一 · 第 1、2、3 版）
+
+**来历** · 东南大学软件学院 · 软件工程 · 2002 — 2006（首届）
 
 ## 精选
 
@@ -43,23 +45,22 @@
 
 **分布式与并发** — Virtual Actor、一致性哈希、SWIM 故障检测、分布式 KV：一次关于“无共享”的长期练习。
 
-[troupe](https://github.com/ShiningRay/troupe) · [troupe-elixir](https://github.com/ShiningRay/troupe-elixir) · [troupe-bench-suite](https://github.com/ShiningRay/troupe-bench-suite) · [ruby-virtual-actor](https://github.com/ShiningRay/ruby-virtual-actor) · [ratatoskr](https://github.com/ShiningRay/ratatoskr) · [swim](https://github.com/ShiningRay/swim) · [hash_ring](https://github.com/ShiningRay/hash_ring) · [distributed-kv](https://github.com/ShiningRay/distributed-kv) · [kv](https://github.com/ShiningRay/kv)
+[troupe](https://github.com/ShiningRay/troupe) · [troupe-elixir](https://github.com/ShiningRay/troupe-elixir) · [troupe-bench-suite](https://github.com/ShiningRay/troupe-bench-suite) · [ruby-virtual-actor](https://github.com/ShiningRay/ruby-virtual-actor) · [ratatoskr](https://github.com/ShiningRay/ratatoskr) · [swim](https://github.com/ShiningRay/swim) · [hash_ring](https://github.com/ShiningRay/hash_ring) · [distributed-kv](https://github.com/ShiningRay/distributed-kv)
 
-**区块链与交易系统** — 撮合引擎、JSON-RPC 代理、Riva 语音代理、BCS 序列化，以及链上合约与工具。
+**区块链与交易系统** — 交易工具、JSON-RPC 代理、Riva 语音代理、BCS 序列化，以及链上合约。
 
-[ethproxy](https://github.com/ShiningRay/ethproxy) · [exchange-nodejs](https://github.com/ShiningRay/exchange-nodejs) · [riva-proxy-rb](https://github.com/ShiningRay/riva-proxy-rb) · [riva-proxy-go](https://github.com/ShiningRay/riva-proxy-go) · [bcs-ruby](https://github.com/ShiningRay/bcs-ruby) · [grpc-ws-bridge](https://github.com/ShiningRay/grpc-ws-bridge) · [artela-throttle-aspect](https://github.com/ShiningRay/artela-throttle-aspect) · [account_service-client](https://github.com/ShiningRay/account_service-client)
+[ethproxy](https://github.com/ShiningRay/ethproxy) · [riva-proxy-rb](https://github.com/ShiningRay/riva-proxy-rb) · [riva-proxy-go](https://github.com/ShiningRay/riva-proxy-go) · [bcs-ruby](https://github.com/ShiningRay/bcs-ruby) · [grpc-ws-bridge](https://github.com/ShiningRay/grpc-ws-bridge) · [artela-throttle-aspect](https://github.com/ShiningRay/artela-throttle-aspect) · [account_service-client](https://github.com/ShiningRay/account_service-client)
 
-**早期作品 · 2013–2018** — 从 Rails 中间件、Atom 插件、Forth 解释器到网页游戏——十年前写下的东西，留着当化石。
+**早期作品 · 2013–2018** — 从 Rails 中间件到网页游戏——十年前写下的东西，留着当化石。
 
-[super_cache](https://github.com/ShiningRay/super_cache) · [select-pasted](https://github.com/ShiningRay/select-pasted) · [teapoy2](https://github.com/ShiningRay/teapoy2) · [miniforth](https://github.com/ShiningRay/miniforth) · [hypergrid](https://github.com/ShiningRay/hypergrid) · [socket.io-rpc](https://github.com/ShiningRay/socket.io-rpc) · [MoreFun](https://github.com/ShiningRay/MoreFun) · [hashchain](https://github.com/ShiningRay/hashchain) · [pichuli](https://github.com/ShiningRay/pichuli) · [alias_fallback](https://github.com/ShiningRay/alias_fallback)
+[super_cache](https://github.com/ShiningRay/super_cache) · [teapoy2](https://github.com/ShiningRay/teapoy2) · [MoreFun](https://github.com/ShiningRay/MoreFun) · [hashchain](https://github.com/ShiningRay/hashchain) · [pichuli](https://github.com/ShiningRay/pichuli)
 
 <details>
-<summary>全部 57 个原创仓库</summary>
+<summary>全部 50 个原创仓库</summary>
 
 - [MoreFun](https://github.com/ShiningRay/MoreFun)
 - [account_service-client](https://github.com/ShiningRay/account_service-client) — Or install it yourself as:
 - [accountant](https://github.com/ShiningRay/accountant) — Or install it yourself as:
-- [alias_fallback](https://github.com/ShiningRay/alias_fallback) — fallback to another method when encounter nil
 - [artela-throttle-aspect](https://github.com/ShiningRay/artela-throttle-aspect) — Throttle Aspect for Artela Blockchain
 - [bcs-ruby](https://github.com/ShiningRay/bcs-ruby) — This Ruby gem provides an implementation of Binary Canonical Serialization (BCS), a serialization format used in blockchain applications like Move language. BCS provides…
 - [beryl](https://github.com/ShiningRay/beryl) — Beryl：Citrine 信号内核之上的桌面式 UI 组件库——窗口管理器、菜单、任务栏与控件目录
@@ -78,15 +79,11 @@
 - [emerald-calc](https://github.com/ShiningRay/emerald-calc) — 第一个第三方 Emerald App：科学计算器。纯 Ruby 组件（Citrine 信号内核 + Beryl 组件库 + Emerald 应用框架），经 Opal 编译运行在浏览器 / macOS 桌面。
 - [emerald-zui](https://github.com/ShiningRay/emerald-zui) — Emerald OS 的 ZUI（缩放式界面）扩展——无限画布、窗口即图标（同一对象两种形态）、相机导航与小地图；citrine/beryl/emerald 之上的范式实验
 - [ethproxy](https://github.com/ShiningRay/ethproxy) — Ethereum JSON-RPC reverse proxy: multi-upstream failover, sync-aware health checks and tiered caching
-- [exchange-nodejs](https://github.com/ShiningRay/exchange-nodejs)
 - [gemvault](https://github.com/ShiningRay/gemvault) — Crystal RubyGems registry: architecture and implementation roadmap
 - [grpc-ws-bridge](https://github.com/ShiningRay/grpc-ws-bridge) — 一个基于 Node.js 的 WebSocket ↔ gRPC 代理，支持 unary、server streaming、client streaming、bidirectional streaming 四种调用方式。前端通过 WebSocket 与该代理通信，代理再与后端 gRPC 服务交互。
 - [hash_ring](https://github.com/ShiningRay/hash_ring) — 一个灵活的 Ruby 一致性哈希实现，支持自定义哈希函数和可配置的虚拟节点。
 - [hashchain](https://github.com/ShiningRay/hashchain)
-- [hypergrid](https://github.com/ShiningRay/hypergrid)
 - [jsondb-rb](https://github.com/ShiningRay/jsondb-rb) — JSON file as database, in Ruby. 零依赖，MongoDB-lite 查询，原子落盘。require 'jsondb' → JsonDb
-- [kv](https://github.com/ShiningRay/kv)
-- [miniforth](https://github.com/ShiningRay/miniforth) — my naive forth implementation
 - [mrb.cr](https://github.com/ShiningRay/mrb.cr) — Thin, explicit Crystal bindings for mruby 4.x
 - [pichuli](https://github.com/ShiningRay/pichuli) — Batch processing for duplicate background jobs
 - [ratatoskr](https://github.com/ShiningRay/ratatoskr) — Lightweight virtual actors for node.js
@@ -95,8 +92,6 @@
 - [riva-proxy-rb](https://github.com/ShiningRay/riva-proxy-rb) — A Ruby client library for NVIDIA Riva Automatic Speech Recognition (ASR) service with built-in mock server for testing.
 - [ruby-virtual-actor](https://github.com/ShiningRay/ruby-virtual-actor)
 - [rubycog](https://github.com/ShiningRay/rubycog) — A tiny RubyLLM agent with one eval tool and a terminal UI
-- [select-pasted](https://github.com/ShiningRay/select-pasted) — Atom 插件：选中上一次粘贴进来的文本。
-- [socket.io-rpc](https://github.com/ShiningRay/socket.io-rpc)
 - [super_cache](https://github.com/ShiningRay/super_cache) — Rails 的轻量缓存中间件，2013 年写的，至今仍是 star 最多的仓库。
 - [swim](https://github.com/ShiningRay/swim) — A robust implementation of the SWIM (Scalable Weakly-consistent Infection-style Process Group Membership) protocol in Ruby, designed for building reliable distributed…
 - [teapoy2](https://github.com/ShiningRay/teapoy2) — 博聆是是一个类似论坛性质得网友讨论得web应用 版权归 曹力（ShiningRay）所有

@@ -28,6 +28,7 @@ const COPY = {
     playing: '在玩',
     stack: '主力技术',
     written: '写过 · 译过',
+    origin: '来历',
   },
   en: {
     file: 'README.profile.en.md',
@@ -44,6 +45,7 @@ const COPY = {
     playing: 'Now playing',
     stack: 'Core stack',
     written: 'Written',
+    origin: 'Education',
   },
 };
 
@@ -114,6 +116,16 @@ async function main() {
             })
             .join(' / '),
         '',
+      );
+    }
+    const origin = site.origin || config.origin;
+    if (origin) {
+      const school = en ? origin.schoolEn || origin.school : origin.school;
+      const major = en ? origin.majorEn || origin.major : origin.major;
+      const badge = en ? origin.badgeEn || origin.badge : origin.badge;
+      const parts = [school, major, origin.years].filter(Boolean).join(' · ');
+      L.push(
+        `**${c.origin}** · ${parts}${badge ? (en ? ` (${badge})` : `（${badge}）`) : ''}`,'',
       );
     }
     L.push(`## ${c.featured}`, '');
