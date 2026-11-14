@@ -198,8 +198,7 @@
         "ratatoskr",
         "swim",
         "hash_ring",
-        "distributed-kv",
-        "kv"
+        "distributed-kv"
       ],
       "nameEn": "Distributed & concurrency",
       "blurbEn": "Virtual actors, consistent hashing, SWIM failure detection, distributed KV — a long practice in shared-nothing."
@@ -207,10 +206,9 @@
     {
       "id": "blockchain",
       "name": "区块链与交易系统",
-      "blurb": "撮合引擎、JSON-RPC 代理、Riva 语音代理、BCS 序列化，以及链上合约与工具。",
+      "blurb": "交易工具、JSON-RPC 代理、Riva 语音代理、BCS 序列化，以及链上合约。",
       "repos": [
         "ethproxy",
-        "exchange-nodejs",
         "riva-proxy-rb",
         "riva-proxy-go",
         "bcs-ruby",
@@ -219,26 +217,21 @@
         "account_service-client"
       ],
       "nameEn": "Blockchain & trading",
-      "blurbEn": "Matching engines, JSON-RPC proxies, Riva speech proxy, BCS serialization, on-chain contracts."
+      "blurbEn": "Trading tools, JSON-RPC proxies, Riva speech proxy, BCS serialization, on-chain contracts."
     },
     {
       "id": "early",
       "name": "早期作品 · 2013–2018",
-      "blurb": "从 Rails 中间件、Atom 插件、Forth 解释器到网页游戏——十年前写下的东西，留着当化石。",
+      "blurb": "从 Rails 中间件到网页游戏——十年前写下的东西，留着当化石。",
       "repos": [
         "super_cache",
-        "select-pasted",
         "teapoy2",
-        "miniforth",
-        "hypergrid",
-        "socket.io-rpc",
         "MoreFun",
         "hashchain",
-        "pichuli",
-        "alias_fallback"
+        "pichuli"
       ],
       "nameEn": "Early work · 2013–2018",
-      "blurbEn": "Rails middleware, an Atom plugin, a Forth interpreter, web games — kept as fossils."
+      "blurbEn": "Rails middleware, web games — kept as fossils."
     }
   ],
   "overrides": {
@@ -248,10 +241,6 @@
     "super_cache": {
       "description": "Rails 的轻量缓存中间件，2013 年写的，至今仍是 star 最多的仓库。",
       "descriptionEn": "The lightweight Rails cache middleware from 2013 — still my most starred repo."
-    },
-    "select-pasted": {
-      "description": "Atom 插件：选中上一次粘贴进来的文本。",
-      "descriptionEn": "Atom plugin: select the text you just pasted."
     },
     "troupe": {
       "description": "Troupe.rb —— Virtual Actor 框架（Troupe.js 的 Ruby 版本，Orleans / Orbit 思想，零 gem 依赖）。",
@@ -306,7 +295,8 @@
       "archiveSrc": "Wayback Machine",
       "remains": "今天还剩下",
       "writing": "写过 · 译过",
-      "writingNote": "写代码之外，也留下过一些字。"
+      "writingNote": "写代码之外，也留下过一些字。",
+      "origin": "来历"
     },
     "en": {
       "eyebrow": "Personal showcase",
@@ -350,7 +340,8 @@
       "archiveSrc": "Wayback Machine",
       "remains": "What's left",
       "writing": "WRITTEN",
-      "writingNote": "Some words left behind besides the code."
+      "writingNote": "Some words left behind besides the code.",
+      "origin": "ORIGIN"
     }
   },
   "writings": [
@@ -372,5 +363,17 @@
         "3"
       ]
     }
-  ]
+  ],
+  "origin": {
+    "school": "东南大学软件学院",
+    "schoolEn": "Southeast University · School of Software",
+    "major": "软件工程",
+    "majorEn": "Software Engineering",
+    "years": "2002 — 2006",
+    "badge": "首届",
+    "badgeEn": "FIRST",
+    "note": "2002 年是东南大学软件工程专业第一届正式招生——我是第一届学生。",
+    "noteEn": "The programme took its first intake in 2002. I was in that first cohort.",
+    "color": "#5ce1e6"
+  }
 }

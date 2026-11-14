@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T07:46:25.016Z",
+  "generatedAt": "2026-11-14T08:18:55.762Z",
   "owner": {
     "login": "ShiningRay",
     "name": "代码之力",
@@ -11,6 +11,23 @@
     "publicRepos": 77
   },
   "repos": [
+    {
+      "name": "ShiningRay",
+      "description": "代码之力 · 个人主页与作品索引",
+      "readme": "",
+      "url": "https://github.com/ShiningRay/ShiningRay",
+      "homepage": "",
+      "language": null,
+      "color": null,
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "isFork": false,
+      "isArchived": false,
+      "pushedAt": "2026-11-14T08:17:10Z",
+      "createdAt": "2026-11-14T07:31:56Z"
+    },
     {
       "name": "shiningray.github.io",
       "description": "个人作品集展示柜 · 77 个开源项目 · 中英双语 · 像素风",
@@ -29,25 +46,48 @@
       "license": null,
       "isFork": false,
       "isArchived": false,
-      "pushedAt": "2026-11-14T07:43:42Z",
+      "pushedAt": "2026-11-14T08:17:07Z",
       "createdAt": "2026-11-14T07:30:00Z"
     },
     {
-      "name": "ShiningRay",
-      "description": "代码之力 · 个人主页与作品索引",
+      "name": "tessell",
+      "description": "A retained-mode, declarative GUI framework for Crystal. Self-drawn rendering, isolated UI execution context, zero-allocation steady-state frames.",
       "readme": "",
-      "url": "https://github.com/ShiningRay/ShiningRay",
+      "url": "https://github.com/ShiningRay/tessell",
       "homepage": "",
-      "language": null,
-      "color": null,
+      "language": "Crystal",
+      "color": "#000100",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "crystal",
+        "crystal-lang",
+        "gui",
+        "retained-mode",
+        "ui-framework"
+      ],
+      "license": "MIT",
+      "isFork": false,
+      "isArchived": false,
+      "pushedAt": "2026-11-14T08:14:11Z",
+      "createdAt": "2026-11-11T12:30:52Z"
+    },
+    {
+      "name": "tessell-sheet-demo",
+      "description": "Spreadsheet demo built with Tessell and Tessell Kit (Crystal, SDL2/OpenGL)",
+      "readme": "",
+      "url": "https://github.com/ShiningRay/tessell-sheet-demo",
+      "homepage": "",
+      "language": "Crystal",
+      "color": "#000100",
       "stars": 0,
       "forks": 0,
       "topics": [],
-      "license": null,
+      "license": "MIT",
       "isFork": false,
       "isArchived": false,
-      "pushedAt": "2026-11-14T07:40:23Z",
-      "createdAt": "2026-11-14T07:31:56Z"
+      "pushedAt": "2026-11-14T08:11:32Z",
+      "createdAt": "2026-11-14T03:41:04Z"
     },
     {
       "name": "celerite",
@@ -65,23 +105,6 @@
       "isArchived": false,
       "pushedAt": "2026-11-14T07:30:43Z",
       "createdAt": "2026-11-06T04:08:03Z"
-    },
-    {
-      "name": "tessell-sheet-demo",
-      "description": "Spreadsheet demo built with Tessell and Tessell Kit (Crystal, SDL2/OpenGL)",
-      "readme": "",
-      "url": "https://github.com/ShiningRay/tessell-sheet-demo",
-      "homepage": "",
-      "language": "Crystal",
-      "color": "#000100",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "isFork": false,
-      "isArchived": false,
-      "pushedAt": "2026-11-14T07:28:28Z",
-      "createdAt": "2026-11-14T03:41:04Z"
     },
     {
       "name": "tessell-mruby",
@@ -104,29 +127,6 @@
       "isArchived": false,
       "pushedAt": "2026-11-14T06:37:50Z",
       "createdAt": "2026-11-14T06:37:43Z"
-    },
-    {
-      "name": "tessell",
-      "description": "A retained-mode, declarative GUI framework for Crystal. Self-drawn rendering, isolated UI execution context, zero-allocation steady-state frames.",
-      "readme": "",
-      "url": "https://github.com/ShiningRay/tessell",
-      "homepage": "",
-      "language": "Crystal",
-      "color": "#000100",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "crystal",
-        "crystal-lang",
-        "gui",
-        "retained-mode",
-        "ui-framework"
-      ],
-      "license": "MIT",
-      "isFork": false,
-      "isArchived": false,
-      "pushedAt": "2026-11-14T06:36:12Z",
-      "createdAt": "2026-11-11T12:30:52Z"
     },
     {
       "name": "tessell-stock-demo",
@@ -855,7 +855,7 @@
       "topics": [],
       "license": null,
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2025-10-18T14:06:47Z",
       "createdAt": "2025-10-03T09:45:25Z"
     },
@@ -1775,7 +1775,7 @@
       "topics": [],
       "license": null,
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2016-05-04T17:39:59Z",
       "createdAt": "2016-04-25T16:21:15Z"
     },
@@ -1792,7 +1792,7 @@
       "topics": [],
       "license": null,
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2016-04-24T16:23:03Z",
       "createdAt": "2016-04-24T14:08:19Z"
     },
@@ -1809,7 +1809,7 @@
       "topics": [],
       "license": "MIT",
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2016-04-10T17:17:05Z",
       "createdAt": "2016-04-10T15:42:44Z"
     },
@@ -1894,7 +1894,7 @@
       "topics": [],
       "license": null,
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2015-02-07T16:04:41Z",
       "createdAt": "2015-02-07T16:03:47Z"
     },
@@ -1962,7 +1962,7 @@
       "topics": [],
       "license": "MIT",
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2013-12-21T18:51:50Z",
       "createdAt": "2013-12-21T18:46:22Z"
     },
@@ -2183,7 +2183,7 @@
       "topics": [],
       "license": "MIT",
       "isFork": false,
-      "isArchived": false,
+      "isArchived": true,
       "pushedAt": "2013-03-25T13:34:26Z",
       "createdAt": "2013-03-25T13:31:32Z"
     },
@@ -2322,23 +2322,6 @@
       "isArchived": false,
       "pushedAt": "2012-05-28T14:44:05Z",
       "createdAt": "2012-06-08T11:26:43Z"
-    },
-    {
-      "name": "thnad",
-      "description": "Just enough of a fictional programming language to show how to write a compiler",
-      "readme": "",
-      "url": "https://github.com/ShiningRay/thnad",
-      "homepage": "",
-      "language": "Ruby",
-      "color": "#701516",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "isFork": true,
-      "isArchived": false,
-      "pushedAt": "2012-05-19T14:10:53Z",
-      "createdAt": "2013-04-09T17:12:57Z"
     },
     {
       "name": "preferences",
