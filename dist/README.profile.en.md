@@ -2,7 +2,7 @@
 
 **Ruby, Crystal, TypeScript and a little Zig. UI frameworks, distributed runtimes, trading systems — and experiments that just needed to run.**
 
-[GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [Showcase](https://shiningray.github.io/?lang=en) · 中文版本 → [README.profile.md](README.profile.md)
+[GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [Showcase](https://shiningray.github.io/?lang=en) · 中文版本 → [README.md](README.md)
 
 `77 original repos` · `73 stars` · `12 languages`
 

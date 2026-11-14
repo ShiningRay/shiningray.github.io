@@ -98,22 +98,35 @@ export GITHUB_TOKEN=…  # 或显式给一个（CI 里用 secrets.GITHUB_TOKEN�
 
 无障碍：正文对比度全部 ≥ 4.5（暗色 7.2–10.9，亮色 5.5–9.1）；`prefers-reduced-motion` 会关掉所有动画；chips 用 `aria-pressed`，语言按钮用 `aria-pressed`。
 
-## 部署到 GitHub Pages
+## 已经上线的两处
 
-1. 新建一个公开仓库（名字随意，比如 `showcase`），把 `showcase/` 目录推上去。
-2. 仓库 **Settings → Pages → Build and deployment → Source** 选 **GitHub Actions**。
-3. 推送即触发 `.github/workflows/deploy.yml`：抓数据 → 构建 → 发布。之后**每天 05:00 自动重跑**（新项目、新 star 会自己出现），也可以在 Actions 页手动 `Run workflow`。
-4. 站点地址形如 `https://<user>.github.io/showcase/`，把它填回 `showcase.config.json` 的 `siteUrl` 再推一次。
+| 用途 | 地址 | 仓库 |
+|---|---|---|
+| 网页展示柜 | https://shiningray.github.io/ | `ShiningRay/shiningray.github.io` |
+| GitHub 主页门面 | https://github.com/ShiningRay | `ShiningRay/ShiningRay` |
 
-> 本页资源全部内联或相对路径，放在子路径下不需要额外配置 `base`。
+改完内容只要推一次：
+
+```bash
+node scripts/build.mjs && node scripts/build-readme.mjs
+git add -A && git commit -m "update: ..." && git push
+```
+
+推送即触发 `.github/workflows/deploy.yml`（构建 → 发布，约 30 秒生效），也可以在 Actions 页手动 `Run workflow`。
+
+## 数据怎么更新（重要）
+
+- **默认**：Actions 直接用仓库里的 `data/repos.json` 快照构建。所以「新仓库、新 star」不会自己出现，要更新得先在本地 `node scripts/fetch-repos.mjs`，再把 `data/repos.json` 推上去。
+- **想自动更新**：仓库 **Settings → Secrets and variables → Actions** 新建 `SHOWCASE_TOKEN`，值填一个只读 PAT（fine-grained 只需 Public repositories 的 read 权限）。工作流检测到它就会每次重新抓取，每天 05:00 也会自动跑一次。
+- **为什么不能直接用 `GITHUB_TOKEN`**：在 Actions 里它查 GraphQL `viewer` 得到的是 `github-actions[bot]`，只看得见本仓库一个仓库 —— 会把「1 个项目的展示页」发上线。这个坑踩过，`fetch-repos.mjs` 和 `build.mjs` 里都留了守卫，数据只剩零星几个仓库时构建会直接失败而不是发一个空站。
 
 ## 再进一步：Profile README
 
 `build-readme.mjs` 产出两份：`dist/README.profile.md`（中文）、`dist/README.profile.en.md`（English），各自顶部有一行互相跳转。
 
-1. 新建**与用户名同名**的仓库 `ShiningRay/ShiningRay`（勾选 "Add a README file"）。
-2. 把其中一份的内容贴成它的 `README.md`（另一份可以另存为 `README.en.md`）。
-3. 提交后，你的 GitHub 主页顶部就是这个展示柜。
+1. 仓库 `ShiningRay/ShiningRay`（与用户名同名，GitHub 会把它渲染成主页顶部）已经建好。
+2. 把 `dist/README.profile.md` 的内容贴成它的 `README.md`，英文版另存为 `README.en.md`。
+3. 提交后，GitHub 主页顶部就是这个展示柜。
 
 两个入口各管一段：**陌生人在 GitHub 上看到的是一页 README**，想细看再点进网页；**网页负责"好看"和"可检索"**。
 

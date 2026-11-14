@@ -2,7 +2,7 @@
 
 **Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。**
 
-[GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [作品集](https://shiningray.github.io/) · English version → [README.profile.en.md](README.profile.en.md)
+[GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [作品集](https://shiningray.github.io/) · English version → [README.en.md](README.en.md)
 
 `77 个原创仓库` · `73 stars` · `12 种语言`
 
