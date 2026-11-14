@@ -1,0 +1,331 @@
+{
+  "site": {
+    "title": "代码之力 · ShiningRay",
+    "description": "ShiningRay（代码之力）的 GitHub 作品集：Ruby / Crystal / TypeScript / Zig，UI 框架、分布式运行时与交易系统。",
+    "brand": "代码之力",
+    "brandEn": "ShiningRay",
+    "eyebrow": "Personal showcase",
+    "lede": "Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。这里是我在 GitHub 上的全部公开项目。",
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/ShiningRay",
+        "kind": "github"
+      },
+      {
+        "label": "X / Twitter",
+        "href": "https://x.com/ShiningRay",
+        "kind": "x"
+      }
+    ],
+    "titleEn": "ShiningRay · Code Force",
+    "descriptionEn": "ShiningRay's GitHub showcase: Ruby, Crystal, TypeScript and Zig — UI frameworks, distributed runtimes and trading systems.",
+    "bubbleEn": "Hi, I'm ShiningRay.",
+    "bubble": "你好，我是代码之力。",
+    "tagline": "把想法跑起来，然后继续下一个。",
+    "taglineEn": "Build it, ship it, start the next one.",
+    "since": "自 2013 年起",
+    "sinceEn": "since 2013"
+  },
+  "siteUrl": "https://shiningray.github.io/",
+  "games": [
+    {
+      "id": "genshin",
+      "name": "原神",
+      "nameEn": "Genshin Impact",
+      "tag": "开放世界",
+      "tagEn": "Open world",
+      "color": "#5ce1e6"
+    },
+    {
+      "id": "starrail",
+      "name": "崩坏：星穹铁道",
+      "nameEn": "Honkai: Star Rail",
+      "tag": "回合制 RPG",
+      "tagEn": "Turn-based RPG",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "zzz",
+      "name": "绝区零",
+      "nameEn": "Zenless Zone Zero",
+      "tag": "动作 · 都市幻想",
+      "tagEn": "Action · urban fantasy",
+      "color": "#ffd166"
+    }
+  ],
+  "legacy": [
+    {
+      "id": "qiushibaike",
+      "domain": "qiushibaike.com",
+      "name": "糗事百科",
+      "nameEn": "Qiushibaike",
+      "blurb": "中国最早的段子社区之一：把「糗事」变成一种网络文体，也让段子从口头笑话变成了可以一直刷的内容。",
+      "blurbEn": "One of China's earliest joke communities — it turned 'qiushi' into an internet genre and made jokes something you could keep scrolling.",
+      "role": "联合创始人",
+      "roleEn": "Co-founder",
+      "years": "",
+      "color": "#ff5fa2",
+      "remains": "「段子」这个词和它的内容形态，还活在每一个推荐流里。",
+      "remainsEn": "The word duanzi and its format live on in every feed."
+    },
+    {
+      "id": "baozou",
+      "domain": "baozoumanhua.com",
+      "name": "暴走漫画",
+      "nameEn": "Baozou Manhua",
+      "blurb": "把暴漫表情带进中文互联网的社区，最早的表情包工厂之一——今天你手机里很多表情的语法，都从这里来。",
+      "blurbEn": "The community that brought rage-comic faces to the Chinese web — one of the first meme factories. A lot of today's emoji grammar starts here.",
+      "role": "CTO",
+      "roleEn": "CTO",
+      "years": "",
+      "color": "#ffd166",
+      "remains": "暴漫表情包至今仍是中文互联网的通用语。",
+      "remainsEn": "Rage faces are still part of the Chinese internet's common tongue."
+    }
+  ],
+  "featured": [
+    "tessell",
+    "citrine",
+    "troupe",
+    "vela",
+    "celerite",
+    "ethproxy"
+  ],
+  "collections": [
+    {
+      "id": "tessell",
+      "name": "Tessell · Crystal 自绘 GUI",
+      "blurb": "保留模式的声明式 GUI 框架：自绘渲染、隔离的 UI 执行上下文、稳态帧零分配。",
+      "repos": [
+        "tessell",
+        "tessell-sheet-demo",
+        "tessell-stock-demo"
+      ],
+      "nameEn": "Tessell · Crystal GUI",
+      "blurbEn": "A retained-mode declarative GUI framework: self-drawn rendering, isolated UI context, zero-allocation steady-state frames."
+    },
+    {
+      "id": "citrine",
+      "name": "Citrine · Ruby 响应式 UI",
+      "blurb": "信号驱动的 Ruby UI：同一套组件经 Opal 跑进浏览器，经 libui / GTK 跑成原生窗口。",
+      "repos": [
+        "citrine",
+        "beryl",
+        "emerald",
+        "emerald-zui",
+        "emerald-calc",
+        "citrine-stream",
+        "citrine-sheets",
+        "citrine-remote",
+        "citrine-market-terminal",
+        "citrine-native",
+        "citrine-native-libui",
+        "citrine-native-gtk",
+        "citrine-devtools"
+      ],
+      "nameEn": "Citrine · Ruby reactive UI",
+      "blurbEn": "Signal-driven Ruby UI: the same components run in the browser via Opal and as native windows via libui / GTK."
+    },
+    {
+      "id": "vela",
+      "name": "Vela · 桌面应用平台",
+      "blurb": "Solid + TypeScript + Tauri 2 的桌面平台：包格式、应用商店、示例应用一整套。",
+      "repos": [
+        "vela",
+        "vela-apps",
+        "vela-marketplace"
+      ],
+      "nameEn": "Vela · Desktop app platform",
+      "blurbEn": "A Solid + TypeScript + Tauri 2 desktop platform: package format, marketplace, sample apps."
+    },
+    {
+      "id": "runtime",
+      "name": "Ruby 运行时与工具链",
+      "blurb": "把 Ruby 嵌进别的语言、把 gems 装得更快、把 JSON 当数据库——围绕 Ruby 生态的基础设施。",
+      "repos": [
+        "mrb.cr",
+        "zruby",
+        "gemvault",
+        "celerite",
+        "jsondb-rb",
+        "turbo_store",
+        "redis-exchange",
+        "turbo-store-demo"
+      ],
+      "nameEn": "Ruby runtime & tooling",
+      "blurbEn": "Embedding Ruby in other languages, installing gems faster, using JSON as a database."
+    },
+    {
+      "id": "distributed",
+      "name": "分布式与并发",
+      "blurb": "Virtual Actor、一致性哈希、SWIM 故障检测、分布式 KV：一次关于“无共享”的长期练习。",
+      "repos": [
+        "troupe",
+        "troupe-elixir",
+        "troupe-bench-suite",
+        "ruby-virtual-actor",
+        "ratatoskr",
+        "swim",
+        "hash_ring",
+        "distributed-kv",
+        "kv",
+        "exchange_engine"
+      ],
+      "nameEn": "Distributed & concurrency",
+      "blurbEn": "Virtual actors, consistent hashing, SWIM failure detection, distributed KV — a long practice in shared-nothing."
+    },
+    {
+      "id": "blockchain",
+      "name": "区块链与交易系统",
+      "blurb": "撮合引擎、JSON-RPC 代理、Riva 语音代理、BCS 序列化，以及链上合约与工具。",
+      "repos": [
+        "ethproxy",
+        "exchange-nodejs",
+        "riva-proxy-rb",
+        "riva-proxy-go",
+        "bcs-ruby",
+        "grpc-ws-bridge",
+        "artela-throttle-aspect",
+        "patents",
+        "account_service-client"
+      ],
+      "nameEn": "Blockchain & trading",
+      "blurbEn": "Matching engines, JSON-RPC proxies, Riva speech proxy, BCS serialization, on-chain contracts."
+    },
+    {
+      "id": "early",
+      "name": "早期作品 · 2013–2018",
+      "blurb": "从 Rails 中间件、Atom 插件、Forth 解释器到网页游戏——十年前写下的东西，留着当化石。",
+      "repos": [
+        "super_cache",
+        "select-pasted",
+        "blinger",
+        "teapoy2",
+        "miniforth",
+        "chats",
+        "natatorium",
+        "hypergrid",
+        "socket.io-rpc",
+        "MoreFun",
+        "static-caching-proxy",
+        "reel-proxy",
+        "node-sockjs-proxy",
+        "chatroom-ruby",
+        "chatroom-models",
+        "firstgold",
+        "webgame",
+        "hashchain",
+        "ethAddress",
+        "myproxy",
+        "pichuli",
+        "alias_fallback"
+      ],
+      "nameEn": "Early work · 2013–2018",
+      "blurbEn": "Rails middleware, an Atom plugin, a Forth interpreter, web games — kept as fossils."
+    }
+  ],
+  "overrides": {
+    "citrine": {
+      "language": "Ruby"
+    },
+    "super_cache": {
+      "description": "Rails 的轻量缓存中间件，2013 年写的，至今仍是 star 最多的仓库。",
+      "descriptionEn": "The lightweight Rails cache middleware from 2013 — still my most starred repo."
+    },
+    "select-pasted": {
+      "description": "Atom 插件：选中上一次粘贴进来的文本。",
+      "descriptionEn": "Atom plugin: select the text you just pasted."
+    },
+    "troupe": {
+      "description": "Troupe.rb —— Virtual Actor 框架（Troupe.js 的 Ruby 版本，Orleans / Orbit 思想，零 gem 依赖）。",
+      "descriptionEn": "Troupe.rb — a Virtual Actor framework (Ruby port of Troupe.js, Orleans / Orbit ideas, zero gem dependencies)."
+    }
+  },
+  "hide": [],
+  "showArchived": true,
+  "i18n": {
+    "zh": {
+      "eyebrow": "个人展示柜",
+      "lede": "Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。",
+      "search": "搜索名称、描述、主题…",
+      "all": "全部",
+      "featured": "精选",
+      "series": "主题系列",
+      "projects": "全部项目",
+      "statusTitle": "状态面板",
+      "langTitle": "语言构成",
+      "statProjects": "项目",
+      "statSeries": "系列",
+      "statLanguages": "语言",
+      "statStars": "Star",
+      "sort": "排序",
+      "sortRecent": "最近更新",
+      "sortStars": "Star 最多",
+      "sortName": "名称",
+      "language": "语言",
+      "allLanguages": "全部语言",
+      "empty": "没有匹配的项目",
+      "emptyHint": "换个关键词，或者清除筛选。",
+      "clear": "清除筛选",
+      "archived": "归档",
+      "updated": "数据更新于",
+      "generated": "由 GitHub API 自动生成",
+      "toggle": "EN",
+      "openGithub": "在 GitHub 打开",
+      "viewAll": "浏览全部项目",
+      "count": "个",
+      "heroCta": "看看作品",
+      "heroCta2": "GitHub 主页",
+      "playing": "在玩",
+      "playingNote": "提瓦特、星穹列车、六分街——三个世界来回切换。",
+      "legacy": "曾经",
+      "legacyNote": "这些站点已经下线了。点开还能看到它们当年的样子。",
+      "offline": "已下线",
+      "seeArchive": "查看当年的样子",
+      "archiveSrc": "Wayback Machine",
+      "remains": "今天还剩下"
+    },
+    "en": {
+      "eyebrow": "Personal showcase",
+      "lede": "Ruby, Crystal, TypeScript and a little Zig. UI frameworks, distributed runtimes, trading systems — and experiments that just needed to run.",
+      "search": "Search name, description, topic…",
+      "all": "All",
+      "featured": "Featured",
+      "series": "Series",
+      "projects": "All projects",
+      "statusTitle": "Status",
+      "langTitle": "Language mix",
+      "statProjects": "Projects",
+      "statSeries": "Series",
+      "statLanguages": "Languages",
+      "statStars": "Stars",
+      "sort": "Sort",
+      "sortRecent": "Recently updated",
+      "sortStars": "Most starred",
+      "sortName": "Name",
+      "language": "Language",
+      "allLanguages": "All languages",
+      "empty": "No projects match",
+      "emptyHint": "Try another keyword, or clear the filters.",
+      "clear": "Clear filters",
+      "archived": "archived",
+      "updated": "Data updated",
+      "generated": "Auto-generated from the GitHub API",
+      "toggle": "中文",
+      "openGithub": "Open on GitHub",
+      "viewAll": "Browse all projects",
+      "count": "",
+      "heroCta": "See the work",
+      "heroCta2": "GitHub profile",
+      "playing": "Now playing",
+      "playingNote": "Teyvat, the Astral Express, Sixth Street — rotating between three worlds.",
+      "legacy": "Then",
+      "legacyNote": "These sites are gone. The links still open what they looked like.",
+      "offline": "offline",
+      "seeArchive": "See how it looked",
+      "archiveSrc": "Wayback Machine",
+      "remains": "What's left"
+    }
+  }
+}

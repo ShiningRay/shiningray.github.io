@@ -1,0 +1,16 @@
+{
+  "name": "shiningray-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ShiningRay 的 GitHub 作品集：从 GitHub API 抓数据，生成单文件静态展示页。",
+  "scripts": {
+    "fetch": "node scripts/fetch-repos.mjs",
+    "build": "node scripts/build.mjs",
+    "readme": "node scripts/build-readme.mjs",
+    "all": "npm run fetch && npm run build && npm run readme"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

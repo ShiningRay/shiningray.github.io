@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>代码之力 · ShiningRay</title>
+<meta name="description" content="ShiningRay（代码之力）的 GitHub 作品集：Ruby / Crystal / TypeScript / Zig，UI 框架、分布式运行时与交易系统。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="代码之力 · ShiningRay">
+<meta property="og:description" content="ShiningRay（代码之力）的 GitHub 作品集：Ruby / Crystal / TypeScript / Zig，UI 框架、分布式运行时与交易系统。">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" fill="%230b0913"/><path fill="%23ff5fa2" d="M7 1h2v5h5v2h-5v5H7V8H2V6h5z"/></svg>'>
+<style>
+/* ============ tokens ============ */
+:root{
+  --bg:#0b0913; --bg2:#120e1f; --panel:#171225; --panel2:#1e1730;
+  --ink:#f4efff; --muted:#c7bbe0; --dim:#a296c0;
+  --pink:#ff5fa2; --cyan:#5ce1e6; --violet:#a78bfa; --lime:#b8f26b; --yellow:#ffd166;
+  --line:#332a4c; --line2:#4a3c70; --shadow:#06040b;
+  --sans:system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+  --px:4px;
+}
+@media (prefers-color-scheme:light){
+  :root{
+    --bg:#fff7fb; --bg2:#fdeef7; --panel:#ffffff; --panel2:#fdf3f9;
+    --ink:#1c1428; --muted:#4b3f66; --dim:#6b5f87;
+    --pink:#d92c76; --cyan:#0c8a92; --violet:#6d4bd8; --lime:#4d8c1a; --yellow:#a8730a;
+    --line:#e7d8ef; --line2:#cbb6da; --shadow:#e3cfe0;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:84px}
+::selection{background:var(--pink); color:#1a0a12}
+body{
+  margin:0; color:var(--ink); background-color:var(--bg); font-family:var(--sans);
+  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 8% -8%, color-mix(in srgb, var(--pink) 18%, transparent), transparent 62%),
+    radial-gradient(820px 460px at 96% 2%, color-mix(in srgb, var(--cyan) 14%, transparent), transparent 64%),
+    radial-gradient(700px 500px at 50% 110%, color-mix(in srgb, var(--violet) 12%, transparent), transparent 66%);
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.5;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px);
+  background-size:24px 24px;
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 82%);
+  mask-image:radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 82%);
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--pink); outline-offset:3px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--panel);border:2px solid var(--pink);padding:8px 14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============ chrome ============ */
+.top{
+  position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:14px clamp(16px,4vw,44px);
+  background:color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter:blur(12px); border-bottom:2px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand svg{color:var(--pink);flex:none}
+.brand-cn{font-weight:800;letter-spacing:-.01em}
+.brand-en{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.top-links{display:flex;align-items:center;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px; padding:9px 15px;
+  border:2px solid var(--line2); background:var(--panel); color:var(--ink);
+  font:600 12.5px/1 var(--mono); letter-spacing:.06em; text-transform:uppercase;
+  box-shadow:3px 3px 0 var(--shadow); cursor:pointer;
+  transition:transform .12s steps(2,end), box-shadow .12s steps(2,end), border-color .12s, background .12s;
+}
+.btn:hover{transform:translate(-1px,-1px); box-shadow:5px 5px 0 var(--shadow); border-color:var(--pink)}
+.btn:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow)}
+.btn-primary{background:var(--pink); color:#1a0a12; border-color:#1a0a12; box-shadow:4px 4px 0 var(--cyan)}
+.btn-primary:hover{border-color:#1a0a12; box-shadow:6px 6px 0 var(--cyan)}
+@media (prefers-color-scheme:light){ .btn-primary{color:#fff} }
+.lang{display:flex; border:2px solid var(--line2); background:var(--panel); box-shadow:3px 3px 0 var(--shadow)}
+.lang button{
+  display:block; padding:8px 11px; border:0; background:none; color:var(--dim); cursor:pointer;
+  font:600 12px/1 var(--mono); letter-spacing:.08em;
+}
+.lang button[aria-pressed="true"]{background:var(--pink); color:#1a0a12}
+@media (prefers-color-scheme:light){ .lang button[aria-pressed="true"]{color:#fff} }
+
+/* ============ layout ============ */
+main{position:relative; z-index:1; max-width:1240px; margin:0 auto; padding:clamp(28px,5vw,64px) clamp(16px,4vw,44px) 0}
+.hero{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:clamp(24px,4vw,56px); align-items:start}
+.hero-left{min-width:0}
+.avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.avatar-frame{position:relative;flex:none;width:86px;height:86px;border:2px solid var(--line2);box-shadow:4px 4px 0 var(--shadow);background:var(--panel)}
+.avatar-frame img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.03)}
+.avatar-frame::after{content:"";position:absolute;right:-6px;bottom:-6px;width:16px;height:16px;background:var(--cyan);border:2px solid var(--shadow)}
+.spark{position:absolute;width:5px;height:5px;background:var(--yellow);animation:twinkle 2.6s steps(2,end) infinite}
+.spark.s1{left:-10px;top:-8px}
+.spark.s2{right:-14px;top:18px;background:var(--pink);animation-delay:.5s}
+.spark.s3{left:6px;bottom:-12px;background:var(--violet);animation-delay:1.1s}
+@keyframes twinkle{0%,60%{opacity:1;transform:scale(1)}61%,100%{opacity:.25;transform:scale(.7)}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;
+  font:600 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+}
+.eyebrow::before{content:"";width:8px;height:8px;background:var(--cyan)}
+h1{margin:0;font-size:clamp(34px,5.4vw,58px);line-height:1.02;font-weight:900;letter-spacing:-.03em}
+.h1-en{display:block;margin-top:12px;font:600 11px/1 var(--mono);letter-spacing:.34em;text-transform:uppercase;color:var(--dim)}
+.lede{margin:20px 0 0;max-width:46ch;color:var(--muted);font-size:15.5px;line-height:1.75}
+.bubble{
+  position:relative;margin:26px 0 0;padding:14px 16px 14px 54px;max-width:44ch;
+  border:2px solid var(--line2);background:var(--panel);box-shadow:4px 4px 0 var(--shadow);
+}
+.bubble svg{position:absolute;left:14px;top:14px;shape-rendering:crispEdges}
+.bubble-line{margin:0;font-weight:700;font-size:14.5px}
+.bubble-tag{margin:4px 0 0;color:var(--dim);font-size:13px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.kana{
+  position:fixed; right:8px; top:50%; transform:translateY(-50%); z-index:2; pointer-events:none;
+  writing-mode:vertical-rl; font:700 11px/1.9 var(--mono); letter-spacing:.5em;
+  color:color-mix(in srgb, var(--violet) 40%, transparent); user-select:none;
+}
+
+/* ============ status panel ============ */
+.status{position:relative;border:2px solid var(--line2);background:var(--panel);box-shadow:6px 6px 0 var(--shadow);padding:18px}
+.status-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.status-head h2{margin:0;font:600 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.status-badge{font:600 10.5px/1 var(--mono);letter-spacing:.1em;color:var(--dim);border:1px solid var(--line2);padding:5px 7px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0;padding:0;list-style:none}
+.tile{border:2px solid var(--line);border-top-width:4px;padding:10px 12px 12px;background:var(--panel2)}
+.tile:nth-child(1){border-top-color:var(--pink)}
+.tile:nth-child(2){border-top-color:var(--cyan)}
+.tile:nth-child(3){border-top-color:var(--violet)}
+.tile:nth-child(4){border-top-color:var(--yellow)}
+.tile b{display:block;font:800 26px/1 var(--mono);letter-spacing:-.02em}
+.tile span{display:block;margin-top:6px;font:600 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.langmix{margin-top:18px;padding-top:16px;border-top:2px dashed var(--line)}
+.langmix h3{margin:0 0 10px;font:600 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.langbar{display:flex;gap:3px;height:12px}
+.langbar i{display:block;min-width:3px;background:var(--c,var(--violet))}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;margin:12px 0 0;padding:0;list-style:none}
+.legend li{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);min-width:0}
+.legend i{width:8px;height:8px;flex:none;background:var(--c)}
+.legend .lg-n{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.legend .lg-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ============ sections ============ */
+section{margin-top:clamp(46px,7vw,84px)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.sec-head h2{margin:0;font-size:19px;font-weight:800;letter-spacing:-.01em}
+.sec-head h2::before{content:"✦";color:var(--pink);margin-right:9px;font-size:14px;vertical-align:2px}
+.sec-count{font:600 11px/1 var(--mono);letter-spacing:.12em;color:var(--dim);border:1px solid var(--line2);padding:4px 7px}
+.sec-line{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 12px)}
+
+/* ============ now playing ============ */
+.playing{margin-top:clamp(34px,4.5vw,52px)}
+.play-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.play-head h2{display:flex;align-items:center;gap:9px;margin:0;font:600 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.play-head h2::before{content:"";width:8px;height:8px;background:var(--lime)}
+.play-note{margin:0;color:var(--dim);font-size:13px}
+.gcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.gcard{
+  position:relative;display:flex;align-items:center;gap:13px;padding:13px 15px;
+  border:2px solid var(--line);border-left:4px solid var(--c);background:var(--panel);
+  box-shadow:3px 3px 0 var(--shadow);
+  transition:transform .12s steps(2,end), border-color .12s, box-shadow .12s;
+}
+.gcard:hover{transform:translate(-2px,-2px);border-color:var(--c);box-shadow:5px 5px 0 var(--shadow)}
+.gicon{flex:none;width:32px;height:32px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb, var(--c) 12%, transparent);border:1px solid color-mix(in srgb, var(--c) 34%, transparent)}
+.gcard b{display:block;font-size:14px;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere}
+.gcard i{display:block;margin-top:3px;font:500 10.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--dim);font-style:normal;text-transform:uppercase}
+.gtag{position:absolute;right:0;top:0;padding:3px 6px;background:var(--c);color:#140c1c;font:700 9.5px/1 var(--mono);letter-spacing:.1em}
+@media (prefers-color-scheme:light){ .gtag{color:#fff} }
+@media (max-width:900px){ .gcards{grid-template-columns:1fr} }
+
+/* ============ featured ============ */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.fcard{
+  position:relative;display:flex;flex-direction:column;padding:20px 20px 18px;
+  border:2px solid var(--line2);border-left-width:6px;border-left-color:var(--pink);
+  background:linear-gradient(180deg,var(--panel),var(--panel2));box-shadow:5px 5px 0 var(--shadow);
+  transition:transform .12s steps(2,end), box-shadow .12s steps(2,end), border-left-color .12s;
+}
+.fcard:nth-child(2){border-left-color:var(--cyan)}
+.fcard:nth-child(3){border-left-color:var(--violet)}
+.fcard:nth-child(4){border-left-color:var(--yellow)}
+.fcard:nth-child(5){border-left-color:var(--lime)}
+.fcard:nth-child(6){border-left-color:var(--pink)}
+.fcard:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--shadow)}
+.fnum{font:600 10.5px/1 var(--mono);letter-spacing:.16em;color:var(--dim)}
+.fcard h3{margin:10px 0 8px;font-size:18px;font-weight:800;letter-spacing:-.01em;overflow-wrap:anywhere}
+.fcard h3 a:hover{color:var(--pink)}
+.fcard p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65;flex:1}
+.fmeta{display:flex;align-items:center;gap:8px;margin-top:14px;font:600 11px/1 var(--mono);letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.farrow{position:absolute;right:16px;top:16px;font:700 15px/1 var(--mono);color:var(--line2);transition:color .12s,transform .12s}
+.fcard:hover .farrow{color:var(--pink);transform:translate(2px,-2px)}
+
+/* ============ legacy / 曾经 ============ */
+.legacy{margin-top:clamp(46px,7vw,84px)}
+.legacy .sec-head h2::before{content:"▚";color:var(--pink)}
+.lnote{margin:-6px 0 20px;color:var(--dim);font-size:13px;max-width:62ch}
+.lcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.lcard{
+  position:relative;display:flex;flex-direction:column;
+  border:2px solid var(--line2);background:var(--panel);box-shadow:4px 4px 0 var(--shadow);
+  transition:transform .12s steps(2,end), box-shadow .12s steps(2,end);
+}
+.lcard:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--shadow)}
+.lwin{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:2px solid var(--line);background:var(--panel2)}
+.ldots{display:flex;gap:4px}
+.ldots i{width:6px;height:6px;background:var(--line2)}
+.ldots i:nth-child(1){background:var(--pink)}
+.ldots i:nth-child(2){background:var(--yellow)}
+.ldots i:nth-child(3){background:var(--cyan)}
+.lurl{
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--dim);
+  border:1px solid var(--line);padding:4px 6px;background:var(--bg);
+}
+.loff{flex:none;font:700 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:4px 6px;background:var(--pink);color:#1a0a12}
+@media (prefers-color-scheme:light){ .loff{color:#fff} }
+.lshot{display:block;border-bottom:2px solid var(--line);background:var(--bg);overflow:hidden;line-height:0}
+.lshot img{display:block;width:100%;height:auto;max-height:260px;object-fit:cover;object-position:top;image-rendering:pixelated;filter:saturate(.92) contrast(1.02)}
+.lbody{padding:16px 16px 14px;flex:1}
+.lcard h3{margin:0;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.lcard h3 .len{display:block;margin-top:5px;font:600 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.lcard p{margin:11px 0 0;color:var(--muted);font-size:13.5px;line-height:1.7}
+.lrem{display:flex;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.6;color:var(--dim)}
+.lrem b{flex:none;font:700 9.5px/1.7 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.lmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:13px}
+.ltag{font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 6px;border:1px solid var(--line2);color:var(--muted)}
+.lyears{font:500 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--dim)}
+.llink{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 16px;border-top:2px dashed var(--line);
+  font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.llink:hover{color:var(--pink)}
+.llink .lsrc{font-size:9.5px;letter-spacing:.08em;color:var(--dim)}
+.llink .lar{font-size:13px;transition:transform .12s steps(2,end)}
+.llink:hover .lar{transform:translate(2px,-2px)}
+
+/* ============ toolbar ============ */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.field{display:flex;align-items:center;gap:9px;padding:0 12px;border:2px solid var(--line2);background:var(--panel);box-shadow:3px 3px 0 var(--shadow)}
+.field>span:not(.sr){font:600 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.field.search{flex:1;min-width:220px}
+.field input,.field select{
+  border:0;background:none;color:var(--ink);font:500 14px/1 var(--sans);
+  padding:12px 0;width:100%;min-width:0;-webkit-appearance:none;appearance:none;outline:none;
+}
+.field select{font-family:var(--mono);font-size:12.5px;cursor:pointer;padding-right:4px}
+.field kbd{font:600 10px/1 var(--mono);color:var(--dim);border:1px solid var(--line2);padding:3px 5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.chip{
+  padding:7px 12px;border:2px solid var(--line);background:var(--panel);color:var(--muted);
+  font:600 12px/1 var(--mono);letter-spacing:.04em;cursor:pointer;
+  transition:transform .1s steps(2,end),color .1s,border-color .1s,background .1s;
+}
+.chip:hover{color:var(--ink);border-color:var(--line2);transform:translate(-1px,-1px)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip b{font-weight:700;opacity:.6;margin-left:6px}
+.series-blurb{margin:10px 0 0;color:var(--dim);font-size:13px;max-width:70ch;min-height:0}
+
+/* ============ grid ============ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:14px;margin-top:20px}
+.card{
+  position:relative;display:flex;flex-direction:column;padding:15px 16px 14px;min-height:140px;
+  border:2px solid var(--line);background:var(--panel);box-shadow:2px 2px 0 var(--shadow);
+  transition:transform .12s steps(2,end), border-color .12s, box-shadow .12s;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;width:9px;height:9px;
+  background:var(--c,var(--line2)); opacity:0; transition:opacity .12s;
+}
+.card:hover{transform:translate(-2px,-2px);border-color:var(--line2);box-shadow:5px 5px 0 var(--shadow)}
+.card:hover::before{opacity:1}
+.card-top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.card h3{margin:0;font-size:15.5px;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere;min-width:0}
+.card h3 a:hover{color:var(--pink)}
+.stars{flex:none;font:600 11px/1 var(--mono);color:var(--dim);padding-top:3px}
+.desc{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.6;flex:1}
+.no-desc{color:var(--dim);font-style:italic;opacity:.7}
+.meta{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:12px;font:600 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--dim)}
+.langdot{width:8px;height:8px;background:var(--c);flex:none}
+.meta .sep{opacity:.4}
+.tag-arch{padding:2px 5px;border:1px solid var(--line2);color:var(--dim)}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.topics span{font:500 10.5px/1 var(--mono);color:var(--dim);padding:3px 6px;border:1px solid var(--line)}
+
+/* ============ empty ============ */
+.empty{display:flex;flex-direction:column;align-items:center;gap:10px;padding:56px 20px;border:2px dashed var(--line2);margin-top:20px}
+.empty svg{color:var(--line2)}
+.empty p{margin:0;color:var(--muted)}
+.empty small{color:var(--dim);font-size:13px}
+
+/* ============ footer ============ */
+.foot{
+  position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:52px clamp(16px,4vw,44px) 56px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font:500 11.5px/1.6 var(--mono);letter-spacing:.06em;color:var(--dim);
+  border-top:2px solid var(--line);margin-top:60px;
+}
+.foot .heart{color:var(--pink)}
+
+@media (max-width:1180px){
+  .kana{display:none}
+}
+@media (max-width:1000px){
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .top{padding:11px 14px}
+  .brand-en{display:none}
+  .tiles{grid-template-columns:1fr 1fr}
+  .grid,.fgrid{grid-template-columns:1fr}
+  .field.search{flex:1 1 100%}
+  .toolbar .field:not(.search){flex:1}
+  h1{font-size:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .card:hover,.fcard:hover,.btn:hover{transform:none}
+}
+</style>
+  <link rel="canonical" href="https://shiningray.github.io/">
+  <meta property="og:url" content="https://shiningray.github.io/">
+</head>
+<body>
+<a class="skip" href="#projects" data-t="projects">全部项目</a>
+
+<header class="top">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M7 0h2v5h5v2h-5v5H7V7H2V5h5z"/></svg>
+    <span class="brand-cn">代码之力</span>
+    <span class="brand-en">ShiningRay</span>
+  </a>
+  <nav class="top-links">
+    <a class="btn" id="navGithub" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" id="navX" target="_blank" rel="noopener">X</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="zh">中文</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" style="margin-top:0">
+    <div class="hero-left">
+      <div class="avatar-row">
+        <div class="avatar-frame">
+          <img id="avatar" alt="" width="86" height="86" decoding="async">
+          <span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span>
+        </div>
+      </div>
+      <p class="eyebrow" data-t="eyebrow"></p>
+      <h1><span id="h1cn">代码之力</span><span class="h1-en" id="h1en">ShiningRay</span></h1>
+      <p class="lede" id="lede"></p>
+      <div class="bubble">
+        <svg viewBox="0 0 12 12" width="24" height="24" aria-hidden="true" shape-rendering="crispEdges">
+          <rect x="2" y="3" width="8" height="6" fill="#ffd9ea"/>
+          <rect x="2" y="2" width="2" height="1" fill="#ffd9ea"/>
+          <rect x="8" y="2" width="2" height="1" fill="#ffd9ea"/>
+          <rect x="3" y="5" width="1" height="2" fill="#2a2140"/>
+          <rect x="8" y="5" width="1" height="2" fill="#2a2140"/>
+          <rect x="5" y="7" width="2" height="1" fill="#ff5fa2"/>
+          <rect x="1" y="6" width="1" height="1" fill="#ffd9ea"/>
+          <rect x="10" y="6" width="1" height="1" fill="#ffd9ea"/>
+        </svg>
+        <p class="bubble-line" id="bubbleLine"></p>
+        <p class="bubble-tag" id="bubbleTag"></p>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#projects" data-t="heroCta"></a>
+        <a class="btn" id="ctaGithub" target="_blank" rel="noopener" data-t="heroCta2"></a>
+      </div>
+    </div>
+
+    <aside class="status">
+      <div class="status-head">
+        <h2 data-t="statusTitle"></h2>
+        <span class="status-badge" id="statusSince"></span>
+      </div>
+      <ul class="tiles" id="tiles"></ul>
+      <div class="langmix">
+        <h3 data-t="langTitle"></h3>
+        <div class="langbar" id="langbar"></div>
+        <ul class="legend" id="legend"></ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="playing" id="playing">
+    <div class="play-head">
+      <h2 data-t="playing"></h2>
+      <p class="play-note" data-t="playingNote"></p>
+    </div>
+    <ul class="gcards" id="gcards"></ul>
+  </section>
+
+  <section id="featured">
+    <div class="sec-head">
+      <h2 data-t="featured"></h2>
+      <span class="sec-count" id="featCount"></span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="fgrid" id="fgrid"></div>
+  </section>
+
+  <section class="legacy" id="legacy">
+    <div class="sec-head">
+      <h2 data-t="legacy"></h2>
+      <span class="sec-count" id="legacyCount"></span>
+      <span class="sec-line"></span>
+    </div>
+    <p class="lnote" data-t="legacyNote"></p>
+    <div class="lcards" id="lcards"></div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2 data-t="projects"></h2>
+      <span class="sec-count" id="projCount"></span>
+      <span class="sec-line"></span>
+    </div>
+
+    <div class="toolbar">
+      <label class="field search">
+        <span class="sr" data-t="search"></span>
+        <input id="search" type="search" autocomplete="off" spellcheck="false">
+        <kbd>/</kbd>
+      </label>
+      <label class="field">
+        <span data-t="language"></span>
+        <select id="langSel"></select>
+      </label>
+      <label class="field">
+        <span data-t="sort"></span>
+        <select id="sortSel"></select>
+      </label>
+    </div>
+
+    <div class="chips" id="chips" role="group"></div>
+    <p class="series-blurb" id="seriesBlurb"></p>
+    <div class="grid" id="grid"></div>
+
+    <div class="empty" id="empty" hidden>
+      <svg viewBox="0 0 16 16" width="40" height="40" aria-hidden="true" shape-rendering="crispEdges">
+        <path fill="currentColor" d="M4 2h8v1h1v1h1v6h-1v1h-1v1H4v-1H3v-1H2V4h1V3h1z"/>
+        <rect x="5" y="5" width="2" height="2" fill="var(--bg)"/>
+        <rect x="9" y="5" width="2" height="2" fill="var(--bg)"/>
+        <rect x="6" y="9" width="4" height="1" fill="var(--bg)"/>
+      </svg>
+      <p data-t="empty"></p>
+      <small data-t="emptyHint"></small>
+      <button class="btn" type="button" id="clearBtn" data-t="clear"></button>
+    </div>
+  </section>
+</main>
+
+<div class="kana" aria-hidden="true">つくりつづける</div>
+
+<footer class="foot">
+  <span class="heart">♥</span>
+  <span id="footGen"></span>
+  <span>·</span>
+  <span id="footUpdated"></span>
+</footer>
+
+<script>
+const DATA = {"lang":"zh","i18n":{"zh":{"eyebrow":"个人展示柜","lede":"Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。","search":"搜索名称、描述、主题…","all":"全部","featured":"精选","series":"主题系列","projects":"全部项目","statusTitle":"状态面板","langTitle":"语言构成","statProjects":"项目","statSeries":"系列","statLanguages":"语言","statStars":"Star","sort":"排序","sortRecent":"最近更新","sortStars":"Star 最多","sortName":"名称","language":"语言","allLanguages":"全部语言","empty":"没有匹配的项目","emptyHint":"换个关键词，或者清除筛选。","clear":"清除筛选","archived":"归档","updated":"数据更新于","generated":"由 GitHub API 自动生成","toggle":"EN","openGithub":"在 GitHub 打开","viewAll":"浏览全部项目","count":"个","heroCta":"看看作品","heroCta2":"GitHub 主页","playing":"在玩","playingNote":"提瓦特、星穹列车、六分街——三个世界来回切换。","legacy":"曾经","legacyNote":"这些站点已经下线了。点开还能看到它们当年的样子。","offline":"已下线","seeArchive":"查看当年的样子","archiveSrc":"Wayback Machine","remains":"今天还剩下"},"en":{"eyebrow":"Personal showcase","lede":"Ruby, Crystal, TypeScript and a little Zig. UI frameworks, distributed runtimes, trading systems — and experiments that just needed to run.","search":"Search name, description, topic…","all":"All","featured":"Featured","series":"Series","projects":"All projects","statusTitle":"Status","langTitle":"Language mix","statProjects":"Projects","statSeries":"Series","statLanguages":"Languages","statStars":"Stars","sort":"Sort","sortRecent":"Recently updated","sortStars":"Most starred","sortName":"Name","language":"Language","allLanguages":"All languages","empty":"No projects match","emptyHint":"Try another keyword, or clear the filters.","clear":"Clear filters","archived":"archived","updated":"Data updated","generated":"Auto-generated from the GitHub API","toggle":"中文","openGithub":"Open on GitHub","viewAll":"Browse all projects","count":"","heroCta":"See the work","heroCta2":"GitHub profile","playing":"Now playing","playingNote":"Teyvat, the Astral Express, Sixth Street — rotating between three worlds.","legacy":"Then","legacyNote":"These sites are gone. The links still open what they looked like.","offline":"offline","seeArchive":"See how it looked","archiveSrc":"Wayback Machine","remains":"What's left"}},"generatedAt":"2026-11-14T05:37:51.352Z","site":{"title":"代码之力 · ShiningRay","description":"ShiningRay（代码之力）的 GitHub 作品集：Ruby / Crystal / TypeScript / Zig，UI 框架、分布式运行时与交易系统。","brand":"代码之力","brandEn":"ShiningRay","eyebrow":"Personal showcase","lede":"Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。这里是我在 GitHub 上的全部公开项目。","links":[{"label":"GitHub","href":"https://github.com/ShiningRay","kind":"github"},{"label":"X / Twitter","href":"https://x.com/ShiningRay","kind":"x"}],"titleEn":"ShiningRay · Code Force","descriptionEn":"ShiningRay's GitHub showcase: Ruby, Crystal, TypeScript and Zig — UI frameworks, distributed runtimes and trading systems.","bubbleEn":"Hi, I'm ShiningRay.","bubble":"你好，我是代码之力。","tagline":"把想法跑起来，然后继续下一个。","taglineEn":"Build it, ship it, start the next one.","since":"自 2013 年起","sinceEn":"since 2013"},"owner":{"login":"ShiningRay","name":"代码之力","bio":"","location":"Shanghai, China","website":"https://x.com/ShiningRay","avatar":"https://avatars.githubusercontent.com/u/9770?u=3a3258c6a1163af17cb16684165bdbd04dafb0c2&v=4","followers":444,"publicRepos":77},"stats":{"repos":77,"stars":73,"languages":12,"lastUpdate":"2026-11-14T05:36:15Z"},"languages":[{"name":"Ruby","count":35,"color":"#e05c5d"},{"name":"TypeScript","count":11,"color":"#3178c6"},{"name":"JavaScript","count":10,"color":"#f1e05a"},{"name":"Crystal","count":7,"color":"#3dff3d"},{"name":"Elixir","count":3,"color":"#6e4a7e"},{"name":"HTML","count":2,"color":"#e34c26"},{"name":"CoffeeScript","count":2,"color":"#244776"},{"name":"Zig","count":1,"color":"#ec915c"},{"name":"Python","count":1,"color":"#3572a5"},{"name":"Go","count":1,"color":"#00add8"},{"name":"Solidity","count":1,"color":"#aa6746"},{"name":"C","count":1,"color":"#555555"}],"collections":[{"id":"tessell","name":"Tessell · Crystal 自绘 GUI","nameEn":"Tessell · Crystal GUI","blurb":"保留模式的声明式 GUI 框架：自绘渲染、隔离的 UI 执行上下文、稳态帧零分配。","blurbEn":"A retained-mode declarative GUI framework: self-drawn rendering, isolated UI context, zero-allocation steady-state frames.","count":3},{"id":"citrine","name":"Citrine · Ruby 响应式 UI","nameEn":"Citrine · Ruby reactive UI","blurb":"信号驱动的 Ruby UI：同一套组件经 Opal 跑进浏览器，经 libui / GTK 跑成原生窗口。","blurbEn":"Signal-driven Ruby UI: the same components run in the browser via Opal and as native windows via libui / GTK.","count":13},{"id":"vela","name":"Vela · 桌面应用平台","nameEn":"Vela · Desktop app platform","blurb":"Solid + TypeScript + Tauri 2 的桌面平台：包格式、应用商店、示例应用一整套。","blurbEn":"A Solid + TypeScript + Tauri 2 desktop platform: package format, marketplace, sample apps.","count":3},{"id":"runtime","name":"Ruby 运行时与工具链","nameEn":"Ruby runtime & tooling","blurb":"把 Ruby 嵌进别的语言、把 gems 装得更快、把 JSON 当数据库——围绕 Ruby 生态的基础设施。","blurbEn":"Embedding Ruby in other languages, installing gems faster, using JSON as a database.","count":8},{"id":"distributed","name":"分布式与并发","nameEn":"Distributed & concurrency","blurb":"Virtual Actor、一致性哈希、SWIM 故障检测、分布式 KV：一次关于“无共享”的长期练习。","blurbEn":"Virtual actors, consistent hashing, SWIM failure detection, distributed KV — a long practice in shared-nothing.","count":10},{"id":"blockchain","name":"区块链与交易系统","nameEn":"Blockchain & trading","blurb":"撮合引擎、JSON-RPC 代理、Riva 语音代理、BCS 序列化，以及链上合约与工具。","blurbEn":"Matching engines, JSON-RPC proxies, Riva speech proxy, BCS serialization, on-chain contracts.","count":9},{"id":"early","name":"早期作品 · 2013–2018","nameEn":"Early work · 2013–2018","blurb":"从 Rails 中间件、Atom 插件、Forth 解释器到网页游戏——十年前写下的东西，留着当化石。","blurbEn":"Rails middleware, an Atom plugin, a Forth interpreter, web games — kept as fossils.","count":22}],"games":[{"id":"genshin","name":"原神","nameEn":"Genshin Impact","tag":"开放世界","tagEn":"Open world","color":"#5ce1e6"},{"id":"starrail","name":"崩坏：星穹铁道","nameEn":"Honkai: Star Rail","tag":"回合制 RPG","tagEn":"Turn-based RPG","color":"#a78bfa"},{"id":"zzz","name":"绝区零","nameEn":"Zenless Zone Zero","tag":"动作 · 都市幻想","tagEn":"Action · urban fantasy","color":"#ffd166"}],"legacy":[{"id":"qiushibaike","domain":"qiushibaike.com","name":"糗事百科","nameEn":"Qiushibaike","blurb":"中国最早的段子社区之一：把「糗事」变成一种网络文体，也让段子从口头笑话变成了可以一直刷的内容。","blurbEn":"One of China's earliest joke communities — it turned 'qiushi' into an internet genre and made jokes something you could keep scrolling.","role":"联合创始人","roleEn":"Co-founder","years":"","color":"#ff5fa2","remains":"「段子」这个词和它的内容形态，还活在每一个推荐流里。","remainsEn":"The word duanzi and its format live on in every feed.","shot":""},{"id":"baozou","domain":"baozoumanhua.com","name":"暴走漫画","nameEn":"Baozou Manhua","blurb":"把暴漫表情带进中文互联网的社区，最早的表情包工厂之一——今天你手机里很多表情的语法，都从这里来。","blurbEn":"The community that brought rage-comic faces to the Chinese web — one of the first meme factories. A lot of today's emoji grammar starts here.","role":"CTO","roleEn":"CTO","years":"","color":"#ffd166","remains":"暴漫表情包至今仍是中文互联网的通用语。","remainsEn":"Rage faces are still part of the Chinese internet's common tongue.","shot":""}],"featured":["tessell","citrine","troupe","vela","celerite","ethproxy"],"repos":[{"name":"tessell","description":"A retained-mode, declarative GUI framework for Crystal. Self-drawn rendering, isolated UI execution context, zero-allocation steady-state frames.","descriptionEn":"A retained-mode, declarative GUI framework for Crystal. Self-drawn rendering, isolated UI execution context, zero-allocation steady-state frames.","url":"https://github.com/ShiningRay/tessell","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":["crystal","crystal-lang","gui","retained-mode"],"archived":false,"pushedAt":"2026-11-14T05:36:15Z","createdAt":"2026-11-11T12:30:52Z","collections":["tessell"],"featured":1},{"name":"celerite","description":"A high-performance, Bundler-compatible Ruby dependency manager written in Crystal.","descriptionEn":"A high-performance, Bundler-compatible Ruby dependency manager written in Crystal.","url":"https://github.com/ShiningRay/celerite","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-14T04:06:55Z","createdAt":"2026-11-06T04:08:03Z","collections":["runtime"],"featured":5},{"name":"tessell-sheet-demo","description":"Spreadsheet demo built with Tessell and Tessell Kit (Crystal, SDL2/OpenGL)","descriptionEn":"Spreadsheet demo built with Tessell and Tessell Kit (Crystal, SDL2/OpenGL)","url":"https://github.com/ShiningRay/tessell-sheet-demo","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-14T03:41:52Z","createdAt":"2026-11-14T03:41:04Z","collections":["tessell"],"featured":0},{"name":"tessell-stock-demo","description":"Tessell 模拟 A 股行情终端 Demo（Crystal + OpenGL 自绘）","descriptionEn":"Tessell 模拟 A 股行情终端 Demo（Crystal + OpenGL 自绘）","url":"https://github.com/ShiningRay/tessell-stock-demo","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":["crystal","gui","opengl","stock-demo"],"archived":false,"pushedAt":"2026-11-14T01:13:11Z","createdAt":"2026-11-14T01:11:34Z","collections":["tessell"],"featured":0},{"name":"mrb.cr","description":"Thin, explicit Crystal bindings for mruby 4.x","descriptionEn":"Thin, explicit Crystal bindings for mruby 4.x","url":"https://github.com/ShiningRay/mrb.cr","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":["bindings","crystal","ffi","mruby"],"archived":false,"pushedAt":"2026-11-13T17:53:14Z","createdAt":"2026-11-13T17:17:33Z","collections":["runtime"],"featured":0},{"name":"zruby","description":"Embed mruby 4.0 in Zig 0.16 applications with a protected C API binding","descriptionEn":"Embed mruby 4.0 in Zig 0.16 applications with a protected C API binding","url":"https://github.com/ShiningRay/zruby","homepage":"","language":"Zig","color":"#ec915c","stars":0,"forks":0,"topics":["embedding","ffi","mruby","ruby"],"archived":false,"pushedAt":"2026-11-13T15:58:39Z","createdAt":"2026-11-13T13:30:13Z","collections":["runtime"],"featured":0},{"name":"ethproxy","description":"Ethereum JSON-RPC reverse proxy: multi-upstream failover, sync-aware health checks and tiered caching","descriptionEn":"Ethereum JSON-RPC reverse proxy: multi-upstream failover, sync-aware health checks and tiered caching","url":"https://github.com/ShiningRay/ethproxy","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":4,"topics":[],"archived":false,"pushedAt":"2026-11-12T01:35:25Z","createdAt":"2022-03-11T04:19:15Z","collections":["blockchain"],"featured":6},{"name":"rubycog","description":"A tiny RubyLLM agent with one eval tool and a terminal UI","descriptionEn":"A tiny RubyLLM agent with one eval tool and a terminal UI","url":"https://github.com/ShiningRay/rubycog","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-10T16:35:24Z","createdAt":"2026-10-29T04:44:11Z","collections":[],"featured":0},{"name":"gemvault","description":"Crystal RubyGems registry: architecture and implementation roadmap","descriptionEn":"Crystal RubyGems registry: architecture and implementation roadmap","url":"https://github.com/ShiningRay/gemvault","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-09T17:58:54Z","createdAt":"2026-11-09T17:55:22Z","collections":["runtime"],"featured":0},{"name":"vela","description":"Vela Desktop — Solid + TypeScript + Tauri 2 desktop platform","descriptionEn":"Vela Desktop — Solid + TypeScript + Tauri 2 desktop platform","url":"https://github.com/ShiningRay/vela","homepage":"https://shiningray.github.io/vela/","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":["desktop","pnpm","solidjs","tauri"],"archived":false,"pushedAt":"2026-11-09T15:45:31Z","createdAt":"2026-10-31T07:10:03Z","collections":["vela"],"featured":4},{"name":"turbo-store-demo","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/turbo-store-demo","homepage":"","language":"HTML","color":"#e34c26","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-09T07:02:43Z","createdAt":"2026-09-21T15:44:46Z","collections":["runtime"],"featured":0},{"name":"citrine-devtools","description":"Citrine/Emerald DevTools 传输层：中继服务 + 浏览器桥接脚本 + Web 调试面板。","descriptionEn":"Citrine/Emerald DevTools 传输层：中继服务 + 浏览器桥接脚本 + Web 调试面板。","url":"https://github.com/ShiningRay/citrine-devtools","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-06T16:54:33Z","createdAt":"2026-09-15T15:02:47Z","collections":["citrine"],"featured":0},{"name":"redis-exchange","description":"Redis Exchange is a Ruby gem that bundles a Redis-backed central limit order book. All state lives in Redis hashes, sorted sets, and lists, while a Lua script performs atomic matching for both limit and market orders.","descriptionEn":"Redis Exchange is a Ruby gem that bundles a Redis-backed central limit order book. All state lives in Redis hashes, sorted sets, and lists, while a Lua script performs atomic matching for both limit and market orders.","url":"https://github.com/ShiningRay/redis-exchange","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-04T16:10:22Z","createdAt":"2025-10-19T03:42:08Z","collections":["runtime"],"featured":0},{"name":"vela-apps","description":"VPK demo apps for Vela Desktop: calculator, Citrine Sheets and Market Terminal","descriptionEn":"VPK demo apps for Vela Desktop: calculator, Citrine Sheets and Market Terminal","url":"https://github.com/ShiningRay/vela-apps","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-11-03T23:59:00Z","createdAt":"2026-10-31T10:44:33Z","collections":["vela"],"featured":0},{"name":"vela-marketplace","description":"Vela Marketplace: publisher accounts, moderation, reviews and .vpk downloads.","descriptionEn":"Vela Marketplace: publisher accounts, moderation, reviews and .vpk downloads.","url":"https://github.com/ShiningRay/vela-marketplace","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":["express","nodejs","plugin-marketplace","typescript"],"archived":false,"pushedAt":"2026-10-31T13:48:48Z","createdAt":"2026-10-31T12:56:18Z","collections":["vela"],"featured":0},{"name":"jsondb-rb","description":"JSON file as database, in Ruby. 零依赖，MongoDB-lite 查询，原子落盘。require 'jsondb' → JsonDb","descriptionEn":"JSON file as database, in Ruby. 零依赖，MongoDB-lite 查询，原子落盘。require 'jsondb' → JsonDb","url":"https://github.com/ShiningRay/jsondb-rb","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T13:43:58Z","createdAt":"2026-10-02T09:11:24Z","collections":["runtime"],"featured":0},{"name":"emerald-zui","description":"Emerald OS 的 ZUI（缩放式界面）扩展——无限画布、窗口即图标（同一对象两种形态）、相机导航与小地图；citrine/beryl/emerald 之上的范式实验","descriptionEn":"Emerald OS 的 ZUI（缩放式界面）扩展——无限画布、窗口即图标（同一对象两种形态）、相机导航与小地图；citrine/beryl/emerald 之上的范式实验","url":"https://github.com/ShiningRay/emerald-zui","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:48:40Z","createdAt":"2026-09-15T23:36:15Z","collections":["citrine"],"featured":0},{"name":"emerald-calc","description":"第一个第三方 Emerald App：科学计算器。纯 Ruby 组件（Citrine 信号内核 + Beryl 组件库 + Emerald 应用框架），经 Opal 编译运行在浏览器 / macOS 桌面。","descriptionEn":"第一个第三方 Emerald App：科学计算器。纯 Ruby 组件（Citrine 信号内核 + Beryl 组件库 + Emerald 应用框架），经 Opal 编译运行在浏览器 / macOS 桌面。","url":"https://github.com/ShiningRay/emerald-calc","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:48:36Z","createdAt":"2026-09-15T11:25:08Z","collections":["citrine"],"featured":0},{"name":"emerald","description":"Emerald OS——Beryl 桌面外壳之上的完整 Web 桌面操作系统：窗口管理、虚拟文件系统、设置/主题、启动器与可分发源码应用（.emz），全部用 Ruby 组件书写、经 Opal 编译在浏览器运行。","descriptionEn":"Emerald OS——Beryl 桌面外壳之上的完整 Web 桌面操作系统：窗口管理、虚拟文件系统、设置/主题、启动器与可分发源码应用（.emz），全部用 Ruby 组件书写、经 Opal 编译在浏览器运行。","url":"https://github.com/ShiningRay/emerald","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":["opal","ruby","signals","ui-framework"],"archived":false,"pushedAt":"2026-10-02T04:48:33Z","createdAt":"2026-09-15T06:34:49Z","collections":["citrine"],"featured":0},{"name":"citrine-stream","description":"Hot event streams for Citrine — time operators (debounce/throttle/switch_map) over signals, injectable clock, RxJS ideas without the RxJS runtime","descriptionEn":"Hot event streams for Citrine — time operators (debounce/throttle/switch_map) over signals, injectable clock, RxJS ideas without the RxJS runtime","url":"https://github.com/ShiningRay/citrine-stream","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":["event-stream","opal","reactive-ui","ruby"],"archived":false,"pushedAt":"2026-10-02T04:48:29Z","createdAt":"2026-09-14T10:59:32Z","collections":["citrine"],"featured":0},{"name":"citrine-sheets","description":"Citrine 迷你电子表格 demo：公式引擎 + 依赖图 + 键盘优先交互","descriptionEn":"Citrine 迷你电子表格 demo：公式引擎 + 依赖图 + 键盘优先交互","url":"https://github.com/ShiningRay/citrine-sheets","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:48:26Z","createdAt":"2026-09-14T10:20:08Z","collections":["citrine"],"featured":0},{"name":"citrine-remote","description":"Citrine::Remote — server-authoritative state mirroring for Citrine (Signal-granularity view projection)","descriptionEn":"Citrine::Remote — server-authoritative state mirroring for Citrine (Signal-granularity view projection)","url":"https://github.com/ShiningRay/citrine-remote","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:48:20Z","createdAt":"2026-09-16T08:52:34Z","collections":["citrine"],"featured":0},{"name":"citrine-native","description":"CRuby 原生运行时（citrine-native）：信号式 Citrine 组件不经 Opal/JS 直接跑成原生控件桌面应用（libui）","descriptionEn":"CRuby 原生运行时（citrine-native）：信号式 Citrine 组件不经 Opal/JS 直接跑成原生控件桌面应用（libui）","url":"https://github.com/ShiningRay/citrine-native","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:48:16Z","createdAt":"2026-09-15T07:21:43Z","collections":["citrine"],"featured":0},{"name":"citrine-market-terminal","description":"Citrine 行情终端模拟盘：用信号式 Ruby UI 框架 Citrine 写的完整 demo（逐档行情 / 蜡烛图 / T+1 限价撮合）+ 框架 v1 摩擦清单","descriptionEn":"Citrine 行情终端模拟盘：用信号式 Ruby UI 框架 Citrine 写的完整 demo（逐档行情 / 蜡烛图 / T+1 限价撮合）+ 框架 v1 摩擦清单","url":"https://github.com/ShiningRay/citrine-market-terminal","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":["demo","opal","reactive","ruby"],"archived":false,"pushedAt":"2026-10-02T04:48:13Z","createdAt":"2026-09-14T09:34:05Z","collections":["citrine"],"featured":0},{"name":"beryl","description":"Beryl：Citrine 信号内核之上的桌面式 UI 组件库——窗口管理器、菜单、任务栏与控件目录","descriptionEn":"Beryl：Citrine 信号内核之上的桌面式 UI 组件库——窗口管理器、菜单、任务栏与控件目录","url":"https://github.com/ShiningRay/beryl","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:48:06Z","createdAt":"2026-09-14T13:37:28Z","collections":["citrine"],"featured":0},{"name":"citrine","description":"Citrine（黄水晶）— Signal-based reactive UI framework for Ruby, powered by Opal","descriptionEn":"Citrine（黄水晶）— Signal-based reactive UI framework for Ruby, powered by Opal","url":"https://github.com/ShiningRay/citrine","homepage":"","language":"Ruby","color":"#f1e05a","stars":1,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T04:44:54Z","createdAt":"2026-09-14T07:02:58Z","collections":["citrine"],"featured":2},{"name":"troupe","description":"Troupe.rb —— Virtual Actor 框架（Troupe.js 的 Ruby 版本，Orleans / Orbit 思想，零 gem 依赖）。","descriptionEn":"Troupe.rb — a Virtual Actor framework (Ruby port of Troupe.js, Orleans / Orbit ideas, zero gem dependencies).","url":"https://github.com/ShiningRay/troupe","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T03:26:29Z","createdAt":"2016-11-07T22:35:47Z","collections":["distributed"],"featured":3},{"name":"troupe-elixir","description":"Troupe for Elixir——Virtual Actor 框架（Troupe.js 的 BEAM 移植），零第三方依赖","descriptionEn":"Troupe for Elixir——Virtual Actor 框架（Troupe.js 的 BEAM 移植），零第三方依赖","url":"https://github.com/ShiningRay/troupe-elixir","homepage":"","language":"Elixir","color":"#6e4a7e","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T03:26:13Z","createdAt":"2026-09-16T12:12:03Z","collections":["distributed"],"featured":0},{"name":"troupe-bench-suite","description":"Troupe 三实现（troupejs / troupe-elixir / trouperb）公平基准套件：统一场景与度量口径","descriptionEn":"Troupe 三实现（troupejs / troupe-elixir / trouperb）公平基准套件：统一场景与度量口径","url":"https://github.com/ShiningRay/troupe-bench-suite","homepage":"","language":"Elixir","color":"#6e4a7e","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-10-02T03:25:46Z","createdAt":"2026-09-16T11:28:22Z","collections":["distributed"],"featured":0},{"name":"turbo_store","description":"Document-level reactive store for Rails with Turbo Stream sync.","descriptionEn":"Document-level reactive store for Rails with Turbo Stream sync.","url":"https://github.com/ShiningRay/turbo_store","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-09-21T16:28:41Z","createdAt":"2026-09-21T15:56:31Z","collections":["runtime"],"featured":0},{"name":"citrine-native-libui","description":"libui native runtime for Citrine components","descriptionEn":"libui native runtime for Citrine components","url":"https://github.com/ShiningRay/citrine-native-libui","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-09-16T03:43:48Z","createdAt":"2026-09-15T18:17:48Z","collections":["citrine"],"featured":0},{"name":"citrine-native-gtk","description":"GTK3 native runtime for Citrine components (experiment)","descriptionEn":"GTK3 native runtime for Citrine components (experiment)","url":"https://github.com/ShiningRay/citrine-native-gtk","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-09-16T03:43:43Z","createdAt":"2026-09-15T17:25:03Z","collections":["citrine"],"featured":0},{"name":"gehong","description":"POST diagnose-sql request response demo:","descriptionEn":"POST diagnose-sql request response demo:","url":"https://github.com/ShiningRay/gehong","homepage":"","language":"Python","color":"#3572a5","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2026-01-04T05:45:53Z","createdAt":"2025-12-24T05:40:31Z","collections":[],"featured":0},{"name":"riva-proxy-rb","description":"A Ruby client library for NVIDIA Riva Automatic Speech Recognition (ASR) service with built-in mock server for testing.","descriptionEn":"A Ruby client library for NVIDIA Riva Automatic Speech Recognition (ASR) service with built-in mock server for testing.","url":"https://github.com/ShiningRay/riva-proxy-rb","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2025-12-23T07:35:30Z","createdAt":"2025-09-18T07:49:48Z","collections":["blockchain"],"featured":0},{"name":"bcs-ruby","description":"This Ruby gem provides an implementation of Binary Canonical Serialization (BCS), a serialization format used in blockchain applications like Move language. BCS provides…","descriptionEn":"This Ruby gem provides an implementation of Binary Canonical Serialization (BCS), a serialization format used in blockchain applications like Move language. BCS provides…","url":"https://github.com/ShiningRay/bcs-ruby","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2025-11-14T17:18:08Z","createdAt":"2025-11-14T17:18:00Z","collections":["blockchain"],"featured":0},{"name":"exchange-nodejs","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/exchange-nodejs","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2025-10-18T14:06:47Z","createdAt":"2025-10-03T09:45:25Z","collections":["blockchain"],"featured":0},{"name":"riva-proxy-go","description":"这个项目提供了 NVIDIA Riva 自动语音识别 (ASR) 服务的 Go 客户端库和模拟服务器实现。","descriptionEn":"这个项目提供了 NVIDIA Riva 自动语音识别 (ASR) 服务的 Go 客户端库和模拟服务器实现。","url":"https://github.com/ShiningRay/riva-proxy-go","homepage":"","language":"Go","color":"#00add8","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2025-09-18T16:46:51Z","createdAt":"2025-09-18T16:37:27Z","collections":["blockchain"],"featured":0},{"name":"grpc-ws-bridge","description":"一个基于 Node.js 的 WebSocket ↔ gRPC 代理，支持 unary、server streaming、client streaming、bidirectional streaming 四种调用方式。前端通过 WebSocket 与该代理通信，代理再与后端 gRPC 服务交互。","descriptionEn":"一个基于 Node.js 的 WebSocket ↔ gRPC 代理，支持 unary、server streaming、client streaming、bidirectional streaming 四种调用方式。前端通过 WebSocket 与该代理通信，代理再与后端 gRPC 服务交互。","url":"https://github.com/ShiningRay/grpc-ws-bridge","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2025-09-17T10:22:27Z","createdAt":"2025-09-17T08:11:37Z","collections":["blockchain"],"featured":0},{"name":"distributed-kv","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/distributed-kv","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2024-11-26T16:04:30Z","createdAt":"2024-11-26T15:59:37Z","collections":["distributed"],"featured":0},{"name":"swim","description":"A robust implementation of the SWIM (Scalable Weakly-consistent Infection-style Process Group Membership) protocol in Ruby, designed for building reliable distributed…","descriptionEn":"A robust implementation of the SWIM (Scalable Weakly-consistent Infection-style Process Group Membership) protocol in Ruby, designed for building reliable distributed…","url":"https://github.com/ShiningRay/swim","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2024-11-26T07:04:59Z","createdAt":"2024-11-23T15:49:00Z","collections":["distributed"],"featured":0},{"name":"hash_ring","description":"一个灵活的 Ruby 一致性哈希实现，支持自定义哈希函数和可配置的虚拟节点。","descriptionEn":"一个灵活的 Ruby 一致性哈希实现，支持自定义哈希函数和可配置的虚拟节点。","url":"https://github.com/ShiningRay/hash_ring","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2024-11-26T03:10:25Z","createdAt":"2024-11-26T03:06:40Z","collections":["distributed"],"featured":0},{"name":"ruby-virtual-actor","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/ruby-virtual-actor","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2024-11-23T15:37:02Z","createdAt":"2024-11-23T11:10:38Z","collections":["distributed"],"featured":0},{"name":"exchange_engine","description":"A high-performance trading system with Redis-backed order book management and a Sinatra-based HTTP API.","descriptionEn":"A high-performance trading system with Redis-backed order book management and a Sinatra-based HTTP API.","url":"https://github.com/ShiningRay/exchange_engine","homepage":"","language":"Ruby","color":"#e05c5d","stars":1,"forks":0,"topics":[],"archived":false,"pushedAt":"2024-11-20T08:31:30Z","createdAt":"2024-11-20T03:07:13Z","collections":["distributed"],"featured":0},{"name":"xudt-test","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/xudt-test","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":true,"pushedAt":"2024-06-14T16:21:09Z","createdAt":"2024-06-14T16:21:06Z","collections":[],"featured":0},{"name":"xudt_splitter","description":"本程序用于将XUDT余额拆分成多个UTXO，以便于后续的交易。","descriptionEn":"本程序用于将XUDT余额拆分成多个UTXO，以便于后续的交易。","url":"https://github.com/ShiningRay/xudt_splitter","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":1,"topics":[],"archived":true,"pushedAt":"2024-05-22T08:06:27Z","createdAt":"2024-04-18T18:07:28Z","collections":[],"featured":0},{"name":"rgbpp_minter","description":"All examples are just to demonstrate the use of RGB++ SDK. SPV proof is not ready yet, so these examples do not involve the verification of SPV proof.","descriptionEn":"All examples are just to demonstrate the use of RGB++ SDK. SPV proof is not ready yet, so these examples do not involve the verification of SPV proof.","url":"https://github.com/ShiningRay/rgbpp_minter","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":true,"pushedAt":"2024-04-17T08:20:29Z","createdAt":"2024-04-17T07:45:51Z","collections":[],"featured":0},{"name":"artela-throttle-aspect","description":"Throttle Aspect for Artela Blockchain","descriptionEn":"Throttle Aspect for Artela Blockchain","url":"https://github.com/ShiningRay/artela-throttle-aspect","homepage":"","language":"JavaScript","color":"#f1e05a","stars":3,"forks":87,"topics":["blockchain"],"archived":false,"pushedAt":"2024-01-29T17:47:36Z","createdAt":"2024-01-27T16:48:54Z","collections":["blockchain"],"featured":0},{"name":"mint-fungible-spl","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/mint-fungible-spl","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":true,"pushedAt":"2023-12-30T14:16:07Z","createdAt":"2023-12-30T14:03:03Z","collections":[],"featured":0},{"name":"accountant","description":"Or install it yourself as:","descriptionEn":"Or install it yourself as:","url":"https://github.com/ShiningRay/accountant","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2023-12-22T02:01:18Z","createdAt":"2023-12-21T14:44:26Z","collections":[],"featured":0},{"name":"combine","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/combine","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":true,"pushedAt":"2022-01-28T09:58:40Z","createdAt":"2022-01-27T04:18:31Z","collections":[],"featured":0},{"name":"combine.cr","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/combine.cr","homepage":"","language":"Crystal","color":"#3dff3d","stars":0,"forks":0,"topics":[],"archived":true,"pushedAt":"2022-01-27T05:40:58Z","createdAt":"2022-01-27T05:40:54Z","collections":[],"featured":0},{"name":"patents","description":"npx hardhat accounts npx hardhat compile npx hardhat test npx hardhat node node scripts/deploy.js npx hardhat help","descriptionEn":"npx hardhat accounts npx hardhat compile npx hardhat test npx hardhat node node scripts/deploy.js npx hardhat help","url":"https://github.com/ShiningRay/patents","homepage":"","language":"Solidity","color":"#aa6746","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2021-05-12T15:46:28Z","createdAt":"2021-05-11T14:13:54Z","collections":["blockchain"],"featured":0},{"name":"account_service-client","description":"Or install it yourself as:","descriptionEn":"Or install it yourself as:","url":"https://github.com/ShiningRay/account_service-client","homepage":"","language":"Ruby","color":"#e05c5d","stars":1,"forks":3,"topics":[],"archived":false,"pushedAt":"2020-10-21T16:40:12Z","createdAt":"2018-11-22T07:57:16Z","collections":["blockchain"],"featured":0},{"name":"hashchain","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/hashchain","homepage":"","language":null,"color":"#8b95ff","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2020-01-06T10:34:35Z","createdAt":"2020-01-06T10:34:34Z","collections":["early"],"featured":0},{"name":"natatorium","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/natatorium","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2018-06-26T07:09:51Z","createdAt":"2018-06-25T10:23:57Z","collections":["early"],"featured":0},{"name":"ethAddress","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/ethAddress","homepage":"","language":"HTML","color":"#e34c26","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2018-02-25T14:13:42Z","createdAt":"2018-02-25T13:10:47Z","collections":["early"],"featured":0},{"name":"chats","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/chats","homepage":"","language":"JavaScript","color":"#f1e05a","stars":1,"forks":1,"topics":[],"archived":false,"pushedAt":"2017-11-28T15:53:04Z","createdAt":"2014-02-16T06:30:09Z","collections":["early"],"featured":0},{"name":"ratatoskr","description":"Lightweight virtual actors for node.js","descriptionEn":"Lightweight virtual actors for node.js","url":"https://github.com/ShiningRay/ratatoskr","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2017-01-30T18:49:21Z","createdAt":"2018-07-04T12:39:04Z","collections":["distributed"],"featured":0},{"name":"MoreFun","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/MoreFun","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2016-06-22T13:11:31Z","createdAt":"2016-06-22T09:30:39Z","collections":["early"],"featured":0},{"name":"blinger","description":"hybrid mobile app client written in Ionic2","descriptionEn":"hybrid mobile app client written in Ionic2","url":"https://github.com/ShiningRay/blinger","homepage":"http://www.bling0.com/","language":"JavaScript","color":"#f1e05a","stars":4,"forks":1,"topics":[],"archived":true,"pushedAt":"2016-06-21T03:19:45Z","createdAt":"2015-05-29T05:12:19Z","collections":["early"],"featured":0},{"name":"hypergrid","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/hypergrid","homepage":"","language":"TypeScript","color":"#3178c6","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2016-05-04T17:39:59Z","createdAt":"2016-04-25T16:21:15Z","collections":["early"],"featured":0},{"name":"socket.io-rpc","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/socket.io-rpc","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2016-04-24T16:23:03Z","createdAt":"2016-04-24T14:08:19Z","collections":["early"],"featured":0},{"name":"select-pasted","description":"Atom 插件：选中上一次粘贴进来的文本。","descriptionEn":"Atom plugin: select the text you just pasted.","url":"https://github.com/ShiningRay/select-pasted","homepage":"https://atom.io/packages/select-pasted","language":"CoffeeScript","color":"#244776","stars":8,"forks":0,"topics":[],"archived":false,"pushedAt":"2016-04-10T17:17:05Z","createdAt":"2016-04-10T15:42:44Z","collections":["early"],"featured":0},{"name":"teapoy2","description":"博聆是是一个类似论坛性质得网友讨论得web应用 版权归 曹力（ShiningRay）所有","descriptionEn":"博聆是是一个类似论坛性质得网友讨论得web应用 版权归 曹力（ShiningRay）所有","url":"https://github.com/ShiningRay/teapoy2","homepage":"http://www.bling0.com","language":"Ruby","color":"#e05c5d","stars":5,"forks":0,"topics":[],"archived":false,"pushedAt":"2016-03-20T14:15:14Z","createdAt":"2015-05-24T09:29:58Z","collections":["early"],"featured":0},{"name":"kv","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/kv","homepage":"","language":"Elixir","color":"#6e4a7e","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2015-02-07T16:04:41Z","createdAt":"2015-02-07T16:03:47Z","collections":["distributed"],"featured":0},{"name":"myproxy","description":"proxy using go","descriptionEn":"proxy using go","url":"https://github.com/ShiningRay/myproxy","homepage":"","language":null,"color":"#8b95ff","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2014-03-26T13:07:02Z","createdAt":"2014-03-26T13:07:02Z","collections":["early"],"featured":0},{"name":"reel-proxy","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/reel-proxy","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":1,"topics":[],"archived":false,"pushedAt":"2014-03-26T08:39:46Z","createdAt":"2014-01-23T07:34:18Z","collections":["early"],"featured":0},{"name":"static-caching-proxy","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/static-caching-proxy","homepage":"","language":"CoffeeScript","color":"#244776","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2014-01-17T05:28:42Z","createdAt":"2014-01-14T07:24:16Z","collections":["early"],"featured":0},{"name":"miniforth","description":"my naive forth implementation","descriptionEn":"my naive forth implementation","url":"https://github.com/ShiningRay/miniforth","homepage":"","language":"C","color":"#555555","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2013-12-21T18:51:50Z","createdAt":"2013-12-21T18:46:22Z","collections":["early"],"featured":0},{"name":"node-sockjs-proxy","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/node-sockjs-proxy","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2013-05-27T16:00:11Z","createdAt":"2013-05-24T08:54:46Z","collections":["early"],"featured":0},{"name":"chatroom-ruby","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/chatroom-ruby","homepage":"","language":"JavaScript","color":"#f1e05a","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2013-05-23T15:53:04Z","createdAt":"2013-05-20T07:18:33Z","collections":["early"],"featured":0},{"name":"chatroom-models","description":"Or install it yourself as:","descriptionEn":"Or install it yourself as:","url":"https://github.com/ShiningRay/chatroom-models","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":1,"topics":[],"archived":false,"pushedAt":"2013-05-23T09:43:44Z","createdAt":"2013-05-19T09:14:20Z","collections":["early"],"featured":0},{"name":"firstgold","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/firstgold","homepage":"","language":"Ruby","color":"#e05c5d","stars":1,"forks":2,"topics":[],"archived":false,"pushedAt":"2013-05-15T06:42:42Z","createdAt":"2013-05-14T16:22:16Z","collections":["early"],"featured":0},{"name":"webgame","description":"","descriptionEn":"","url":"https://github.com/ShiningRay/webgame","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2013-05-14T16:16:58Z","createdAt":"2013-05-14T16:01:19Z","collections":["early"],"featured":0},{"name":"super_cache","description":"Rails 的轻量缓存中间件，2013 年写的，至今仍是 star 最多的仓库。","descriptionEn":"The lightweight Rails cache middleware from 2013 — still my most starred repo.","url":"https://github.com/ShiningRay/super_cache","homepage":"","language":"Ruby","color":"#e05c5d","stars":48,"forks":12,"topics":[],"archived":false,"pushedAt":"2013-04-13T03:59:55Z","createdAt":"2013-03-02T10:10:01Z","collections":["early"],"featured":0},{"name":"alias_fallback","description":"fallback to another method when encounter nil","descriptionEn":"fallback to another method when encounter nil","url":"https://github.com/ShiningRay/alias_fallback","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2013-03-25T13:34:26Z","createdAt":"2013-03-25T13:31:32Z","collections":["early"],"featured":0},{"name":"pichuli","description":"Batch processing for duplicate background jobs","descriptionEn":"Batch processing for duplicate background jobs","url":"https://github.com/ShiningRay/pichuli","homepage":"","language":"Ruby","color":"#e05c5d","stars":0,"forks":0,"topics":[],"archived":false,"pushedAt":"2013-03-17T16:15:53Z","createdAt":"2013-03-17T15:34:01Z","collections":["early"],"featured":0}],"forksSkipped":74,"firstYear":2013};
+
+(function () {
+  if (!DATA) return;
+  const D = DATA;
+  const HOST = 'https://github.com/' + (D.owner.login || '');
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) =>
+    String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  /* ---------- 语言 ---------- */
+  const AVAILABLE = Object.keys(D.i18n || { zh: {} });
+  const store = {
+    get() { try { return localStorage.getItem('showcase:lang'); } catch (e) { return null; } },
+    set(v) { try { localStorage.setItem('showcase:lang', v); } catch (e) {} },
+  };
+  function pickLang() {
+    const q = new URLSearchParams(location.search).get('lang');
+    if (q && AVAILABLE.includes(q)) return q;
+    const saved = store.get();
+    if (saved && AVAILABLE.includes(saved)) return saved;
+    const nav = (navigator.language || 'zh').toLowerCase();
+    return nav.startsWith('zh') ? 'zh' : AVAILABLE.includes('en') ? 'en' : D.lang || 'zh';
+  }
+  let lang = pickLang();
+
+  const T = (k) => {
+    const s = D.i18n[lang] || {};
+    const fallback = D.i18n.zh || {};
+    return s[k] != null ? s[k] : fallback[k] != null ? fallback[k] : k;
+  };
+  const L = (obj, base) => (lang === 'en' ? obj[base + 'En'] || obj[base] || '' : obj[base] || obj[base + 'En'] || '');
+
+  /* ---------- 状态 ---------- */
+  let q = '';
+  let coll = 'all';
+  let langFilter = 'all';
+  let sortBy = 'recent';
+
+  const num = (n) => Number(n || 0).toLocaleString(lang === 'zh' ? 'zh-CN' : 'en-US');
+  const month = (iso) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+  };
+
+  /* ---------- 静态文案 ---------- */
+  function paintText() {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = L(D.site, 'title');
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', L(D.site, 'description'));
+    document.querySelectorAll('[data-t]').forEach((n) => {
+      n.textContent = T(n.dataset.t);
+    });
+    $('#search').placeholder = T('search');
+    $('#lede').textContent = T('lede');
+    const big = lang === 'en' ? D.site.brandEn : D.site.brand;
+    const small = lang === 'en' ? `${D.site.brand} · CODE FORCE` : D.site.brandEn;
+    $('#h1cn').textContent = big;
+    $('#h1en').textContent = small;
+    $('#bubbleLine').textContent = L(D.site, 'bubble');
+    $('#bubbleTag').textContent = L(D.site, 'tagline');
+    $('#footGen').textContent = `${T('generated')} · ${D.owner.login}`;
+    $('#footUpdated').textContent = `${T('updated')} ${month(D.stats.lastUpdate || D.generatedAt)}`;
+    document.querySelectorAll('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    const gh = (D.site.links || []).find((l) => l.kind === 'github') || { href: HOST };
+    const x = (D.site.links || []).find((l) => l.kind === 'x');
+    $('#navGithub').href = $('#ctaGithub').href = gh.href;
+    if (x) { $('#navX').href = x.href; $('#navX').hidden = false; } else $('#navX').hidden = true;
+  }
+
+/* ---------- 在玩的游戏 ---------- */
+  const GLYPH = {
+    genshin:
+      '<rect x="7" y="1" width="2" height="14"/><rect x="1" y="7" width="14" height="2"/>' +
+      '<rect x="3" y="3" width="2" height="2"/><rect x="11" y="3" width="2" height="2"/>' +
+      '<rect x="3" y="11" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/>',
+    starrail:
+      '<rect x="7" y="1" width="2" height="3"/><rect x="6" y="3" width="4" height="2"/>' +
+      '<rect x="1" y="6" width="14" height="2"/><rect x="4" y="8" width="8" height="2"/>' +
+      '<rect x="3" y="10" width="3" height="3"/><rect x="10" y="10" width="3" height="3"/>',
+    zzz:
+      '<rect x="3" y="1" width="2" height="4"/><rect x="11" y="1" width="2" height="4"/>' +
+      '<rect x="3" y="5" width="10" height="9"/>' +
+      '<rect x="5" y="8" width="2" height="2" fill="var(--panel)"/><rect x="9" y="8" width="2" height="2" fill="var(--panel)"/>' +
+      '<rect x="6" y="11" width="4" height="1" fill="var(--panel)"/>',
+  };
+
+  function paintGames() {
+    const list = D.games || [];
+    $('#playing').hidden = !list.length;
+    if (!list.length) return;
+    $('#gcards').innerHTML = list
+      .map((g) => {
+        const glyph = GLYPH[g.id] || GLYPH.starrail;
+        return `<li class="gcard" style="--c:${esc(g.color || '#a78bfa')}">
+          <span class="gicon"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" shape-rendering="crispEdges" fill="currentColor">${glyph}</svg></span>
+          <span class="gtxt"><b>${esc(L(g, 'name'))}</b><i>${esc(L(g, 'tag'))}</i></span>
+          <span class="gtag" aria-hidden="true">PLAY</span>
+        </li>`;
+      })
+      .join('');
+  }
+
+/* ---------- 曾经（已下线） ---------- */
+  function paintLegacy() {
+    const list = D.legacy || [];
+    $('#legacy').hidden = !list.length;
+    if (!list.length) return;
+    $('#legacyCount').textContent = String(list.length).padStart(2, '0');
+    $('#lcards').innerHTML = list
+      .map((x) => {
+        const arch = `https://web.archive.org/web/*/${encodeURIComponent(x.domain || '')}`;
+        return `<article class="lcard" style="--c:${esc(x.color || '#ff5fa2')}">
+          <div class="lwin">
+            <span class="ldots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="lurl">${esc(x.domain || '')}</span>
+            <span class="loff">${esc(T('offline'))}</span>
+          </div>
+          ${x.shot ? `<div class="lshot"><img src="${esc(x.shot)}" alt="${esc(L(x, 'name'))}" loading="lazy" decoding="async"></div>` : ''}
+          <div class="lbody">
+            <h3>${esc(L(x, 'name'))}<span class="len">${esc(lang === 'en' ? x.name : x.nameEn || '')}</span></h3>
+            <p>${esc(L(x, 'blurb'))}</p>
+            ${x.remains ? `<p class="lrem"><b>${esc(T('remains'))}</b><span>${esc(L(x, 'remains'))}</span></p>` : ''}
+            <div class="lmeta">
+              <span class="ltag">${esc(L(x, 'role'))}</span>
+              ${x.years ? `<span class="lyears">${esc(x.years)}</span>` : ''}
+            </div>
+          </div>
+          <a class="llink" href="${esc(arch)}" target="_blank" rel="noopener">
+            <span>${esc(T('seeArchive'))}<span class="lsrc"> · ${esc(T('archiveSrc'))}</span></span>
+            <span class="lar" aria-hidden="true">↗</span>
+          </a>
+        </article>`;
+      })
+      .join('');
+  }
+
+  /* ---------- 统计 ---------- */
+  function paintStats() {
+    const st = D.stats;
+    const cells = [
+      [st.repos, T('statProjects')],
+      [D.collections.length, T('statSeries')],
+      [st.languages, T('statLanguages')],
+      [st.stars, T('statStars')],
+    ];
+    $('#tiles').innerHTML = cells
+      .map(([v, label]) => `<li class="tile"><b data-n="${v}">0</b><span>${esc(label)}</span></li>`)
+      .join('');
+    if (D.firstYear) $('#statusSince').textContent = lang === 'zh' ? `自 ${D.firstYear} 起` : `since ${D.firstYear}`;
+
+    const total = D.languages.reduce((s, l) => s + l.count, 0) || 1;
+    $('#langbar').innerHTML = D.languages
+      .map((l) => `<i style="--c:${esc(l.color)};flex:${l.count}"></i>`)
+      .join('');
+    $('#legend').innerHTML = D.languages
+      .map(
+        (l) => `<li title="${esc(l.name)}: ${l.count}">
+          <i style="--c:${esc(l.color)}"></i><span class="lg-name">${esc(l.name)}</span>
+          <span class="lg-n">${Math.round((l.count / total) * 100)}%</span></li>`,
+      )
+      .join('');
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-n]').forEach((el) => {
+      const target = Number(el.dataset.n) || 0;
+      if (reduce || target > 9999) { el.textContent = num(target); return; }
+      let cur = 0;
+      const step = Math.max(1, Math.ceil(target / 18));
+      const tick = () => {
+        cur = Math.min(target, cur + step);
+        el.textContent = num(cur);
+        if (cur < target) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  /* ---------- 筛选控件 ---------- */
+  function paintControls() {
+    const total = D.languages.reduce((s, l) => s + l.count, 0) || 1;
+    $('#langSel').innerHTML =
+      `<option value="all">${esc(T('allLanguages'))}</option>` +
+      D.languages
+        .map((l) => `<option value="${esc(l.name)}">${esc(l.name)} · ${l.count}</option>`)
+        .join('');
+    $('#langSel').value = langFilter;
+
+    $('#sortSel').innerHTML = [
+      ['recent', T('sortRecent')],
+      ['stars', T('sortStars')],
+      ['name', T('sortName')],
+    ]
+      .map(([v, label]) => `<option value="${v}">${esc(label)}</option>`)
+      .join('');
+    $('#sortSel').value = sortBy;
+
+    const chips = [{ id: 'all', name: T('all'), count: D.repos.length }].concat(
+      D.collections.map((c) => ({ id: c.id, name: L(c, 'name'), count: c.count })),
+    );
+    $('#chips').innerHTML = chips
+      .map(
+        (c) =>
+          `<button class="chip" type="button" data-coll="${esc(c.id)}" aria-pressed="${coll === c.id}">${esc(c.name)}<b>${c.count}</b></button>`,
+      )
+      .join('');
+  }
+
+  /* ---------- 精选 ---------- */
+  function paintFeatured(show) {
+    $('#featured').hidden = !show;
+    if (!show) return;
+    const items = D.featured.map((n) => D.repos.find((r) => r.name === n)).filter(Boolean);
+    $('#featCount').textContent = String(items.length).padStart(2, '0');
+    $('#fgrid').innerHTML = items
+      .map((r, i) => {
+        const d = L(r, 'description') || L(r, 'readme') || '';
+        return `<article class="fcard">
+          <span class="fnum">${String(i + 1).padStart(2, '0')} / ${esc(T('featured').toUpperCase())}</span>
+          <span class="farrow" aria-hidden="true">↗</span>
+          <h3><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></h3>
+          <p>${esc(d)}</p>
+          <div class="fmeta"><span class="langdot" style="--c:${esc(r.color)}"></span>${esc(r.language || '—')}
+            <span class="sep">·</span> ★ ${num(r.stars)}</div>
+        </article>`;
+      })
+      .join('');
+  }
+
+  /* ---------- 列表 ---------- */
+  function matches(r) {
+    if (coll !== 'all' && !(r.collections || []).includes(coll)) return false;
+    if (langFilter !== 'all' && r.language !== langFilter) return false;
+    if (!q) return true;
+    const hay = [r.name, r.description, r.descriptionEn, (r.topics || []).join(' ')].join(' ').toLowerCase();
+    return hay.includes(q);
+  }
+
+  function sortList(list) {
+    const byName = (a, b) => a.name.localeCompare(b.name, 'en');
+    if (sortBy === 'name') return [...list].sort(byName);
+    if (sortBy === 'stars') return [...list].sort((a, b) => b.stars - a.stars || byName(a, b));
+    return [...list].sort((a, b) => (a.pushedAt < b.pushedAt ? 1 : a.pushedAt > b.pushedAt ? -1 : 0));
+  }
+
+  function paintList() {
+    const list = sortList(D.repos.filter(matches));
+    $('#projCount').textContent = T('count') ? `${list.length} ${T('count')}` : String(list.length);
+    $('#empty').hidden = list.length > 0;
+    $('#grid').innerHTML = list
+      .map((r) => {
+        const d = L(r, 'description') || L(r, 'readme') || '';
+        const topics = (r.topics || [])
+          .slice(0, 3)
+          .map((t) => `<span>${esc(t)}</span>`)
+          .join('');
+        return `<article class="card" style="--c:${esc(r.color)}">
+          <div class="card-top">
+            <h3><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></h3>
+            ${r.stars ? `<span class="stars">★ ${num(r.stars)}</span>` : ''}
+          </div>
+          <p class="desc${d ? '' : ' no-desc'}">${d ? esc(d) : '—'}</p>
+          <div class="meta">
+            <span class="langdot" style="--c:${esc(r.color)}"></span>
+            <span>${esc(r.language || 'n/a')}</span>
+            <span class="sep">·</span><span>${month(r.pushedAt)}</span>
+            ${r.archived ? `<span class="tag-arch">${esc(T('archived'))}</span>` : ''}
+          </div>
+          ${topics ? `<div class="topics">${topics}</div>` : ''}
+        </article>`;
+      })
+      .join('');
+  }
+
+  function refresh() {
+    const filtering = !!q || coll !== 'all' || langFilter !== 'all';
+    paintFeatured(!filtering);
+    const c = D.collections.find((x) => x.id === coll);
+    $('#seriesBlurb').textContent = c ? L(c, 'blurb') : '';
+    paintList();
+  }
+
+  /* ---------- 事件 ---------- */
+  function setLang(next) {
+    if (!AVAILABLE.includes(next)) return;
+    lang = next;
+    store.set(next);
+    paintText();
+    paintGames();
+    paintLegacy();
+    paintStats();
+    paintControls();
+    refresh();
+  }
+
+  function bind() {
+    document.querySelectorAll('.lang button').forEach((b) =>
+      b.addEventListener('click', () => setLang(b.dataset.lang)),
+    );
+
+    const search = $('#search');
+    let timer;
+    search.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        q = search.value.trim().toLowerCase();
+        refresh();
+      }, 110);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== search) {
+        e.preventDefault();
+        search.focus();
+      }
+      if (e.key === 'Escape' && document.activeElement === search) {
+        search.value = '';
+        q = '';
+        refresh();
+      }
+    });
+
+    $('#langSel').addEventListener('change', (e) => {
+      langFilter = e.target.value;
+      refresh();
+    });
+    $('#sortSel').addEventListener('change', (e) => {
+      sortBy = e.target.value;
+      refresh();
+    });
+    $('#chips').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-coll]');
+      if (!b) return;
+      coll = b.dataset.coll;
+      paintControls();
+      refresh();
+    });
+    $('#clearBtn').addEventListener('click', () => {
+      q = '';
+      coll = 'all';
+      langFilter = 'all';
+      $('#search').value = '';
+      paintControls();
+      refresh();
+    });
+  }
+
+  /* ---------- 启动 ---------- */
+  const av = $('#avatar');
+  if (D.owner.avatar) av.src = D.owner.avatar;
+  av.alt = D.owner.name || D.owner.login || '';
+  av.addEventListener('error', () => { av.style.visibility = 'hidden'; });
+
+  paintText();
+  paintGames();
+  paintLegacy();
+  paintStats();
+  paintControls();
+  refresh();
+  bind();
+})();
+</script>
+</body>
+</html>
