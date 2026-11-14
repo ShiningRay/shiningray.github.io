@@ -1,12 +1,14 @@
 ### 代码之力 · ShiningRay
 
-**Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。**
+**主业是 Ruby on Rails 与 TypeScript / JavaScript：社区、交易系统、分布式运行时。近年也在用 Crystal 重写一套 UI 基础设施。**
 
 [GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [作品集](https://shiningray.github.io/) · English version → [README.en.md](README.en.md)
 
 `57 个原创仓库` · `66 stars` · `10 种语言`
 
 **在玩** · 原神 / 崩坏：星穹铁道 / 绝区零
+
+**主力技术** · Ruby · Rails · TypeScript · JavaScript
 
 ## 精选
 

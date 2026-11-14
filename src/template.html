@@ -178,6 +178,22 @@ section{margin-top:clamp(46px,7vw,84px)}
 @media (prefers-color-scheme:light){ .gtag{color:#fff} }
 @media (max-width:900px){ .gcards{grid-template-columns:1fr} }
 
+/* ============ stack / 主力技术 ============ */
+.stack{margin-top:clamp(30px,4vw,46px)}
+.stack .play-head h2::before{background:var(--pink)}
+.stacks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.sitem{
+  position:relative;padding:14px 16px 13px;border:2px solid var(--line);border-left:4px solid var(--c);
+  background:var(--panel);box-shadow:3px 3px 0 var(--shadow);
+  transition:transform .12s steps(2,end), border-color .12s, box-shadow .12s;
+}
+.sitem:hover{transform:translate(-2px,-2px);border-color:var(--c);box-shadow:5px 5px 0 var(--shadow)}
+.sitem b{display:block;padding-right:62px;font:700 16px/1.25 var(--mono);letter-spacing:-.01em;color:var(--ink);overflow-wrap:anywhere}
+.sitem i{display:block;margin-top:5px;font:500 12.5px/1.55 var(--sans);color:var(--dim);font-style:normal}
+.srole{position:absolute;right:0;top:0;padding:3px 6px;background:var(--c);color:#140c1c;font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+@media (prefers-color-scheme:light){ .srole{color:#fff} }
+@media (max-width:900px){ .stacks{grid-template-columns:1fr} }
+
 /* ============ featured ============ */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .fcard{
@@ -394,6 +410,14 @@ section{margin-top:clamp(46px,7vw,84px)}
     </aside>
   </section>
 
+  <section class="stack" id="stack">
+    <div class="play-head">
+      <h2 data-t="stack"></h2>
+      <p class="play-note" id="stackNote"></p>
+    </div>
+    <ul class="stacks" id="stacks"></ul>
+  </section>
+
   <section class="playing" id="playing">
     <div class="play-head">
       <h2 data-t="playing"></h2>
@@ -574,6 +598,24 @@ const DATA = /*__DATA__*/ null;
           <span class="gtag" aria-hidden="true">PLAY</span>
         </li>`;
       })
+      .join('');
+  }
+
+/* ---------- 主力技术栈 ---------- */
+  function paintStack() {
+    const st = D.stack || {};
+    const list = st.items || [];
+    $('#stack').hidden = !list.length;
+    if (!list.length) return;
+    $('#stackNote').textContent = L(st, 'note');
+    $('#stacks').innerHTML = list
+      .map(
+        (s) => `<li class="sitem" style="--c:${esc(s.color || '#a78bfa')}">
+          <span class="srole">${esc(L(s, 'role'))}</span>
+          <b>${esc(s.name)}</b>
+          <i>${esc(L(s, 'note'))}</i>
+        </li>`,
+      )
       .join('');
   }
 
@@ -762,6 +804,7 @@ const DATA = /*__DATA__*/ null;
     lang = next;
     store.set(next);
     paintText();
+    paintStack();
     paintGames();
     paintLegacy();
     paintStats();
@@ -827,6 +870,7 @@ const DATA = /*__DATA__*/ null;
   av.addEventListener('error', () => { av.style.visibility = 'hidden'; });
 
   paintText();
+  paintStack();
   paintGames();
   paintLegacy();
   paintStats();

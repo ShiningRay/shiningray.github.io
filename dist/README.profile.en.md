@@ -1,12 +1,14 @@
 ### 代码之力 · ShiningRay
 
-**Ruby, Crystal, TypeScript and a little Zig. UI frameworks, distributed runtimes, trading systems — and experiments that just needed to run.**
+**Main work in Ruby on Rails and TypeScript/JavaScript: communities, trading systems, distributed runtimes. Lately rebuilding UI infrastructure in Crystal.**
 
 [GitHub](https://github.com/ShiningRay) · [X / Twitter](https://x.com/ShiningRay) · [Showcase](https://shiningray.github.io/?lang=en) · 中文版本 → [README.md](README.md)
 
 `57 original repos` · `66 stars` · `10 languages`
 
 **Now playing** · Genshin Impact / Honkai: Star Rail / Zenless Zone Zero
+
+**Core stack** · Ruby · Rails · TypeScript · JavaScript
 
 ## Featured
 

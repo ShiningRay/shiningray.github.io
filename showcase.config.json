@@ -1,11 +1,11 @@
 {
   "site": {
     "title": "代码之力 · ShiningRay",
-    "description": "ShiningRay（代码之力）的 GitHub 作品集：Ruby / Crystal / TypeScript / Zig，UI 框架、分布式运行时与交易系统。",
+    "description": "ShiningRay（代码之力）的 GitHub 作品集：主力是 Ruby / Rails 与 TypeScript / JavaScript，另有 Crystal、Zig 等实验。",
     "brand": "代码之力",
     "brandEn": "ShiningRay",
     "eyebrow": "Personal showcase",
-    "lede": "Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。这里是我在 GitHub 上的全部公开项目。",
+    "lede": "主业是 Ruby on Rails 与 TypeScript / JavaScript：社区、交易系统、分布式运行时。近年也在用 Crystal 重写一套 UI 基础设施。",
     "links": [
       {
         "label": "GitHub",
@@ -19,13 +19,22 @@
       }
     ],
     "titleEn": "ShiningRay · Code Force",
-    "descriptionEn": "ShiningRay's GitHub showcase: Ruby, Crystal, TypeScript and Zig — UI frameworks, distributed runtimes and trading systems.",
+    "descriptionEn": "ShiningRay's GitHub showcase — Ruby on Rails and TypeScript/JavaScript for the main work, Crystal and Zig for experiments.",
     "bubbleEn": "Hi, I'm ShiningRay.",
     "bubble": "你好，我是代码之力。",
     "tagline": "把想法跑起来，然后继续下一个。",
     "taglineEn": "Build it, ship it, start the next one.",
     "since": "自 2013 年起",
-    "sinceEn": "since 2013"
+    "sinceEn": "since 2013",
+    "stack": {
+      "note": "业务都长在这两样上：Ruby / Rails 在后端与产品，TypeScript / JavaScript 在前端与工具链。",
+      "noteEn": "Most of the business ran on these two: Ruby/Rails on the server and product side, TypeScript/JavaScript on the front end and tooling.",
+      "items": [
+        { "name": "Ruby", "role": "主力", "roleEn": "primary", "note": "业务系统、gem、服务端都写在这上面。", "noteEn": "Business systems, gems, everything server-side.", "color": "#CC342D" },
+        { "name": "Rails", "role": "主框架", "roleEn": "framework", "note": "Web 应用与 API 的默认选择。", "noteEn": "The default choice for web apps and APIs.", "color": "#E0443C" },
+        { "name": "TypeScript · JavaScript", "role": "其次", "roleEn": "second", "note": "前端、工具链与链上代理。", "noteEn": "Front ends, tooling and on-chain proxies.", "color": "#3178C6" }
+      ]
+    }
   },
   "siteUrl": "https://shiningray.github.io/",
   "games": [
@@ -236,7 +245,8 @@
   "i18n": {
     "zh": {
       "eyebrow": "个人展示柜",
-      "lede": "Ruby、Crystal、TypeScript 与一点 Zig。做 UI 框架、分布式运行时、交易系统，以及各种把想法跑起来的实验。",
+      "lede": "主业是 Ruby on Rails 与 TypeScript / JavaScript：社区、交易系统、分布式运行时。近年也在用 Crystal 重写一套 UI 基础设施。",
+      "stack": "主力技术",
       "search": "搜索名称、描述、主题…",
       "all": "全部",
       "featured": "精选",
@@ -277,7 +287,8 @@
     },
     "en": {
       "eyebrow": "Personal showcase",
-      "lede": "Ruby, Crystal, TypeScript and a little Zig. UI frameworks, distributed runtimes, trading systems — and experiments that just needed to run.",
+      "lede": "Main work in Ruby on Rails and TypeScript/JavaScript: communities, trading systems, distributed runtimes. Lately rebuilding UI infrastructure in Crystal.",
+      "stack": "Core stack",
       "search": "Search name, description, topic…",
       "all": "All",
       "featured": "Featured",

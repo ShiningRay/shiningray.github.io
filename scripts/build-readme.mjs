@@ -26,6 +26,7 @@ const COPY = {
     gen: (d, u) => `<sub>由 GitHub API 自动生成 · ${d}${u ? ` · ${u}` : ''}</sub>`,
     stats: (r, s, l) => `\`${r} 个原创仓库\` · \`${s} stars\` · \`${l} 种语言\``,
     playing: '在玩',
+    stack: '主力技术',
   },
   en: {
     file: 'README.profile.en.md',
@@ -40,6 +41,7 @@ const COPY = {
     gen: (d, u) => `<sub>Auto-generated from the GitHub API · ${d}${u ? ` · ${u}` : ''}</sub>`,
     stats: (r, s, l) => `\`${r} original repos\` · \`${s} stars\` · \`${l} languages\``,
     playing: 'Now playing',
+    stack: 'Core stack',
   },
 };
 
@@ -92,6 +94,10 @@ async function main() {
     const games = config.games || [];
     if (games.length) {
       L.push(`**${c.playing}** · ${games.map((g) => (en ? g.nameEn || g.name : g.name)).join(' / ')}`, '');
+    }
+    const stack = site.stack;
+    if (stack && (stack.items || []).length) {
+      L.push(`**${c.stack}** · ${stack.items.map((s) => s.name).join(' · ')}`, '');
     }
     L.push(`## ${c.featured}`, '');
     L.push(`| ${c.project} | ${c.language} | ${c.desc} |`);

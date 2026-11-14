@@ -188,6 +188,7 @@ async function main() {
     languages,
     collections,
     games: config.games || [],
+    stack: site.stack || null,
     legacy: (config.legacy || []).map((x) => ({ ...x, shot: inlineImage(x.shot) })),
     featured,
     repos,
