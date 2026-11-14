@@ -10,7 +10,7 @@
 
 **Core stack** · Ruby · Rails · TypeScript · JavaScript
 
-**Written** · Professional JavaScript for Web Developers (Translator)
+**Written** · Professional JavaScript for Web Developers (Co-translator · Editions 1, 2 & 3)
 
 ## Featured
 

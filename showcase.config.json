@@ -358,14 +358,19 @@
       "id": "professional-javascript",
       "title": "JavaScript 高级程序设计",
       "titleEn": "Professional JavaScript for Web Developers",
-      "role": "译者",
-      "roleEn": "Translator",
-      "blurb": "参与过这本书的翻译。它大概是中文世界里最多人读过的 JS 书——很多前端是从这本开始写第一行 console.log 的。",
-      "blurbEn": "I worked on the Chinese translation. For a generation of Chinese front-end developers, this was the book that came before their first console.log.",
-      "meta": "",
-      "metaEn": "",
+      "role": "译者之一",
+      "roleEn": "Co-translator",
+      "blurb": "三版的翻译都参与了。中文世界里很多前端是从这本书开始写下第一行 console.log 的。",
+      "blurbEn": "I worked on the Chinese translations of all three editions — for a generation of Chinese front-end developers, the book that came before their first console.log.",
+      "meta": "第 1、2、3 版",
+      "metaEn": "Editions 1, 2 & 3",
       "href": "",
-      "color": "#F0DB4F"
+      "color": "#F0DB4F",
+      "editions": [
+        "1",
+        "2",
+        "3"
+      ]
     }
   ]
 }

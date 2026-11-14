@@ -204,7 +204,10 @@ section{margin-top:clamp(46px,7vw,84px)}
   transition:transform .12s steps(2,end), box-shadow .12s steps(2,end);
 }
 .wcard:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--shadow)}
-.wspine{flex:none;width:12px;background:var(--c);box-shadow:inset -4px 0 0 color-mix(in srgb, var(--shadow) 40%, transparent)}
+.wspine{flex:none;display:flex;flex-direction:column;width:12px;background:var(--c);box-shadow:inset -4px 0 0 color-mix(in srgb, var(--shadow) 40%, transparent)}
+.wspine i{flex:1;background:var(--c);border-bottom:2px solid var(--shadow)}
+.wspine i:nth-child(even){filter:brightness(1.22) saturate(1.1)}
+.wspine i:last-child{border-bottom:0}
 .wbody{flex:1;min-width:0;padding:16px 18px 15px}
 .wcard h3{margin:0;padding-right:56px;font-size:16.5px;font-weight:800;letter-spacing:-.01em;overflow-wrap:anywhere}
 .wcard h3 a:hover{color:var(--pink)}
@@ -212,7 +215,8 @@ section{margin-top:clamp(46px,7vw,84px)}
 .wcard p{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
 .wrole{position:absolute;right:0;top:0;padding:3px 6px;background:var(--c);color:#140c1c;font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
 @media (prefers-color-scheme:light){ .wrole{color:#fff} }
-.wmeta{margin-top:11px;font:500 10.5px/1.6 var(--mono);color:var(--dim)}
+.wmeta{margin-top:11px;font:500 10.5px/1.6 var(--mono);letter-spacing:.04em;color:var(--dim)}
+.wmeta b{font-weight:700;color:var(--muted)}
 
 /* ============ featured ============ */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
@@ -664,12 +668,12 @@ const DATA = /*__DATA__*/ null;
         const sub = lang === 'en' ? x.title : x.titleEn || '';
         const meta = L(x, 'meta');
         return `<article class="wcard" style="--c:${esc(x.color || '#f0db4f')}">
-          <span class="wspine" aria-hidden="true"></span>
+          <span class="wspine" aria-hidden="true">${(x.editions && x.editions.length ? x.editions : ['']).map(() => `<i></i>`).join('')}</span>
           <div class="wbody">
             <span class="wrole">${esc(L(x, 'role'))}</span>
             <h3>${head}<span class="wen">${esc(sub)}</span></h3>
             <p>${esc(L(x, 'blurb'))}</p>
-            ${meta ? `<div class="wmeta">${esc(meta)}</div>` : ''}
+            ${meta ? `<div class="wmeta"><b>${esc(meta)}</b></div>` : ''}
           </div>
         </article>`;
       })

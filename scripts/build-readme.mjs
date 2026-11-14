@@ -106,7 +106,12 @@ async function main() {
       L.push(
         `**${c.written}** · ` +
           writings
-            .map((w) => `${en ? w.titleEn || w.title : w.title}${en ? ' (' + (w.roleEn || w.role) + ')' : '（' + (w.role || '') + '）'}`)
+            .map((w) => {
+              const role = en ? w.roleEn || w.role : w.role || '';
+              const meta = en ? w.metaEn || '' : w.meta || '';
+              const inside = [role, meta].filter(Boolean).join(' · ');
+              return `${en ? w.titleEn || w.title : w.title}${en ? (inside ? ' (' + inside + ')' : '') : (inside ? '（' + inside + '）' : '')}`;
+            })
             .join(' / '),
         '',
       );
