@@ -10,7 +10,7 @@
 
 **主力技术** · Ruby · Rails · TypeScript · JavaScript
 
-**写过 · 译过** · JavaScript 高级程序设计（译者之一 · 第 1、2、3 版）
+**写过 · 译过** · JavaScript 高级程序设计（译者之一 · 第 1、2、3 版） · [豆瓣](https://book.douban.com/subject/10546125/)
 
 **来历** · 东南大学软件学院 · 软件工程 · 2002 — 2006（首届）
 

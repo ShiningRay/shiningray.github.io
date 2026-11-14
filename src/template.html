@@ -218,6 +218,19 @@ section{margin-top:clamp(46px,7vw,84px)}
 .wmeta{margin-top:11px;font:500 10.5px/1.6 var(--mono);letter-spacing:.04em;color:var(--dim)}
 .wmeta b{font-weight:700;color:var(--muted)}
 
+/* 封面 */
+.wcovers{flex:none;display:flex;align-items:flex-end;gap:8px;padding:14px 0 14px 14px}
+.wcovers a{display:block;line-height:0;box-shadow:3px 3px 0 var(--shadow);border:2px solid var(--line);transition:transform .14s steps(2,end),border-color .14s steps(2,end),box-shadow .14s steps(2,end)}
+.wcovers a:last-child{border-color:var(--c)}
+.wcovers a:hover{transform:translate(-2px,-3px);border-color:var(--c);box-shadow:5px 6px 0 var(--shadow)}
+.wcovers img{display:block;width:86px;height:auto;image-rendering:auto}
+.wcovers a:last-child img{width:96px}
+.wlinks{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.wlink{padding:4px 8px;border:2px solid var(--line);font:600 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--muted);text-decoration:none;transition:all .12s steps(2,end)}
+.wlink:hover{border-color:var(--c);color:var(--ink);transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--shadow)}
+.wlink b{color:var(--c)}
+@media(max-width:640px){.wcard{flex-direction:column}.wcovers{padding:14px 14px 0;order:-1;flex-wrap:nowrap;gap:7px}.wcovers img{width:78px}.wcovers a:last-child img{width:86px}.wbody{padding:14px 15px 15px}.wcard h3{padding-right:0}.wrole{position:static;display:inline-block;margin-bottom:9px}}
+
 /* 来历 */
 .origin{margin-top:34px}
 .ocard{position:relative;display:flex;align-items:flex-start;gap:15px;padding:19px 20px 18px;background:var(--panel);border:2px solid var(--line);box-shadow:4px 4px 0 var(--shadow)}
@@ -688,13 +701,20 @@ const DATA = /*__DATA__*/ null;
           : main;
         const sub = lang === 'en' ? x.title : x.titleEn || '';
         const meta = L(x, 'meta');
+        const covers = (x.covers || []).filter((c) => c.src);
+        const links = covers.length
+          ? `<div class="wlinks">${covers.map((c) => `<a class="wlink" href="${esc(c.href)}" target="_blank" rel="noopener"><b>${esc(L(c, 'label'))}</b> · ${esc(c.year || '')}</a>`).join('')}${x.href ? `<a class="wlink" href="${esc(x.href)}" target="_blank" rel="noopener">${esc(T('douban'))} ↗</a>` : ''}</div>`
+          : '';
         return `<article class="wcard" style="--c:${esc(x.color || '#f0db4f')}">
-          <span class="wspine" aria-hidden="true">${(x.editions && x.editions.length ? x.editions : ['']).map(() => `<i></i>`).join('')}</span>
+          ${covers.length
+            ? `<div class="wcovers">${covers.map((c, i) => `<a href="${esc(c.href)}" target="_blank" rel="noopener" title="${esc(L(c, 'label'))} · ${esc(c.year || '')}" aria-label="${esc(L(x, 'title'))} ${esc(L(c, 'label'))}"><img src="${esc(c.src)}" alt="" width="86"></a>`).join('')}</div>`
+            : `<span class="wspine" aria-hidden="true">${(x.editions && x.editions.length ? x.editions : ['']).map(() => `<i></i>`).join('')}</span>`}
           <div class="wbody">
             <span class="wrole">${esc(L(x, 'role'))}</span>
             <h3>${head}<span class="wen">${esc(sub)}</span></h3>
             <p>${esc(L(x, 'blurb'))}</p>
             ${meta ? `<div class="wmeta"><b>${esc(meta)}</b></div>` : ''}
+            ${links}
           </div>
         </article>`;
       })

@@ -10,7 +10,7 @@
 
 **Core stack** · Ruby · Rails · TypeScript · JavaScript
 
-**Written** · Professional JavaScript for Web Developers (Co-translator · Editions 1, 2 & 3)
+**Written** · Professional JavaScript for Web Developers (Co-translator · Editions 1, 2 & 3) · [Douban](https://book.douban.com/subject/10546125/)
 
 **Education** · Southeast University · School of Software · Software Engineering · 2002 — 2006 (FIRST INTAKE)
 

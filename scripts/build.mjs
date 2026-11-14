@@ -190,7 +190,10 @@ async function main() {
     games: config.games || [],
     stack: site.stack || null,
     origin: site.origin || config.origin || null,
-    writings: config.writings || [],
+    writings: (config.writings || []).map((w) => ({
+      ...w,
+      covers: (w.covers || []).map((c) => ({ ...c, src: inlineImage(c.img) })),
+    })),
     legacy: (config.legacy || []).map((x) => ({ ...x, shot: inlineImage(x.shot) })),
     featured,
     repos,

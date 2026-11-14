@@ -62,7 +62,8 @@ export GITHUB_TOKEN=…  # 或显式给一个（CI 里用 secrets.GITHUB_TOKEN�
 | `games` | 「在玩」区：`id`、`name`/`nameEn`、`tag`/`tagEn`、`color`。`id` 同时决定用哪个像素徽标，见下表 |
 | `legacy` | 「曾经」区（已下线产品）：`domain`、`name`/`nameEn`、`blurb`/`blurbEn`、`role`/`roleEn`、`years`、`color`；`years` 留空则不显示。链接自动指向 `web.archive.org/web/*/{domain}`。可选 `shot`：本地图片路径（见下） |
 | `stack` | 「主力技术」区：`note`/`noteEn` + `items[]`（`name`、`role`/`roleEn`、`note`/`noteEn`、`color`），写在 `site` 里 |
-| `writings` | 「写过 · 译过」区：`title`/`titleEn`、`role`/`roleEn`、`blurb`/`blurbEn`、可选 `meta`（版次/出版社等）、`href`、`color` |
+| `writings` | 「写过 · 译过」区：`title`/`titleEn`、`role`/`roleEn`、`blurb`/`blurbEn`、可选 `meta`（版次/出版社等）、`href`（标题与「豆瓣」链接指向）、`color`；可选 `covers[]`（`label`/`labelEn`、`year`、`href`、`img`）→ 每版一张封面并排展示，点击直达该书豆瓣页；图片放 `assets/books/`，构建时 base64 内联，建议 ≤400 KB、宽 360px 左右 |
+| `origin` | 「来历」区：`school`/`schoolEn`、`major`/`majorEn`、`years`、`badge`/`badgeEn`（如「首届」）、`note`/`noteEn`、`color` |
 | `i18n.zh` / `i18n.en` | **界面文案**：按钮、表头、排序项、空状态…每个键两边各写一份 |
 | `featured` | 精选仓库名，按顺序排 |
 | `collections` | 主题系列：`name`/`nameEn`、`blurb`/`blurbEn`、`repos[]` |

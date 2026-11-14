@@ -296,7 +296,8 @@
       "remains": "今天还剩下",
       "writing": "写过 · 译过",
       "writingNote": "写代码之外，也留下过一些字。",
-      "origin": "来历"
+      "origin": "来历",
+      "douban": "豆瓣"
     },
     "en": {
       "eyebrow": "Personal showcase",
@@ -341,7 +342,8 @@
       "remains": "What's left",
       "writing": "WRITTEN",
       "writingNote": "Some words left behind besides the code.",
-      "origin": "ORIGIN"
+      "origin": "ORIGIN",
+      "douban": "Douban"
     }
   },
   "writings": [
@@ -355,12 +357,36 @@
       "blurbEn": "I worked on the Chinese translations of all three editions — for a generation of Chinese front-end developers, the book that came before their first console.log.",
       "meta": "第 1、2、3 版",
       "metaEn": "Editions 1, 2 & 3",
-      "href": "",
+      "href": "https://book.douban.com/subject/10546125/",
       "color": "#F0DB4F",
       "editions": [
         "1",
         "2",
         "3"
+      ],
+      "coverLinks": true,
+      "covers": [
+        {
+          "label": "第 1 版",
+          "labelEn": "Ed. 1",
+          "year": "2006",
+          "href": "https://book.douban.com/subject/1869705/",
+          "img": "assets/books/jsap-1.jpg"
+        },
+        {
+          "label": "第 2 版",
+          "labelEn": "Ed. 2",
+          "year": "2010",
+          "href": "https://book.douban.com/subject/4886879/",
+          "img": "assets/books/jsap-2.jpg"
+        },
+        {
+          "label": "第 3 版",
+          "labelEn": "Ed. 3",
+          "year": "2012",
+          "href": "https://book.douban.com/subject/10546125/",
+          "img": "assets/books/jsap-3.jpg"
+        }
       ]
     }
   ],

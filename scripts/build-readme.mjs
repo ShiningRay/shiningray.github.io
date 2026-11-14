@@ -112,7 +112,10 @@ async function main() {
               const role = en ? w.roleEn || w.role : w.role || '';
               const meta = en ? w.metaEn || '' : w.meta || '';
               const inside = [role, meta].filter(Boolean).join(' · ');
-              return `${en ? w.titleEn || w.title : w.title}${en ? (inside ? ' (' + inside + ')' : '') : (inside ? '（' + inside + '）' : '')}`;
+              const title = en ? w.titleEn || w.title : w.title;
+              const bracket = inside ? (en ? ` (${inside})` : `（${inside}）`) : '';
+              const link = w.href ? ` · [${en ? 'Douban' : '豆瓣'}](${w.href})` : '';
+              return `${title}${bracket}${link}`;
             })
             .join(' / '),
         '',
