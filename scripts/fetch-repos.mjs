@@ -222,6 +222,17 @@ async function main() {
     repos,
   };
 
+  // 防线：Actions 里的 GITHUB_TOKEN 查 viewer 得到的是 github-actions[bot]，
+  // 只能看见本仓库一个——这种情况必须失败退出，绝不能把「1 个仓库的展示页」发上线。
+  const origin = viewer?.login ?? '';
+  if (/\[bot\]$/.test(origin) || repos.length < 20) {
+    throw new Error(
+      `抓取结果不可信（viewer=${origin || '未知'}，公开仓库 ${repos.length} 个）。\n` +
+        '  本地：确认 gh auth status 登录的是本人账号。\n' +
+        '  CI：配置一个带 public read 权限的 SHOWCASE_TOKEN 再跑抓取，或跳过抓取步骤直接用仓库里已有的 data/repos.json。',
+    );
+  }
+
   await mkdir(dirname(OUT), { recursive: true });
   await writeFile(OUT, JSON.stringify(payload, null, 2) + '\n', 'utf8');
   console.log(`\n✓ 写入 ${OUT}`);

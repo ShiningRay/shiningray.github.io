@@ -116,6 +116,13 @@ async function main() {
       };
     });
 
+  // 防线：数据只剩零星几个仓库时直接失败，不要把半个空站发上线
+  if (repos.length < 20) {
+    throw new Error(
+      `只有 ${repos.length} 个项目，data/repos.json 可能被写坏了。先跑 node scripts/fetch-repos.mjs 重新抓取。`,
+    );
+  }
+
   const repoMap = new Map(repos.map((r) => [r.name, r]));
 
   // ---- 精选 ----
