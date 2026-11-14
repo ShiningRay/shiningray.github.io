@@ -410,6 +410,20 @@
     "badgeEn": "FIRST INTAKE",
     "note": "2002 年是东南大学软件工程专业第一届正式招生——我是第一届学生。",
     "noteEn": "The programme took its first ever intake in 2002. I was in that first cohort.",
-    "color": "#5ce1e6"
+    "color": "#5ce1e6",
+    "logos": [
+      {
+        "img": "assets/school/seu-emblem.png",
+        "alt": "Southeast University",
+        "wide": false
+      },
+      {
+        "img": "assets/school/cse-wordmark.png",
+        "alt": "School of Computer Science and Engineering, SEU",
+        "wide": true
+      }
+    ],
+    "merged": "软件学院现已并入计算机科学与工程学院",
+    "mergedEn": "The software school has since merged into the School of Computer Science and Engineering"
   }
 }

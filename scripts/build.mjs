@@ -189,7 +189,11 @@ async function main() {
     collections,
     games: config.games || [],
     stack: site.stack || null,
-    origin: site.origin || config.origin || null,
+    origin: (() => {
+      const o = site.origin || config.origin;
+      if (!o) return null;
+      return { ...o, logos: (o.logos || []).map((l) => ({ ...l, src: inlineImage(l.img) })) };
+    })(),
     writings: (config.writings || []).map((w) => ({
       ...w,
       covers: (w.covers || []).map((c) => ({ ...c, src: inlineImage(c.img) })),
