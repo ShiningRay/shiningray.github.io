@@ -218,6 +218,11 @@ section{margin-top:clamp(46px,7vw,84px)}
 .wmeta{margin-top:11px;font:500 10.5px/1.6 var(--mono);letter-spacing:.04em;color:var(--dim)}
 .wmeta b{font-weight:700;color:var(--muted)}
 
+/* 技术图标（手绘 16×16 像素） */
+.sicogroup{display:inline-flex;align-items:flex-end;gap:5px;margin-right:9px;vertical-align:-4px}
+.sicon{width:22px;height:22px;flex:none;filter:drop-shadow(2px 2px 0 var(--shadow))}
+.sicon--sm{width:18px;height:18px}
+
 /* 封面 */
 .wcovers{flex:none;display:flex;align-items:flex-end;gap:8px;padding:14px 0 14px 14px}
 .wcovers a{display:block;line-height:0;box-shadow:3px 3px 0 var(--shadow);border:2px solid var(--line);transition:transform .14s steps(2,end),border-color .14s steps(2,end),box-shadow .14s steps(2,end)}
@@ -637,6 +642,40 @@ const DATA = /*__DATA__*/ null;
   }
 
 /* ---------- 在玩的游戏 ---------- */
+  /* 16×16 像素图标：每项 = [填充色, 矩形数组 x,y,w,h] */
+  const ICONS = {
+    ruby: [
+      ['#ff8f85', [[5, 2, 6, 1], [4, 3, 8, 1], [3, 4, 10, 1]]],
+      ['#cc342d', [[3, 5, 10, 1], [4, 6, 8, 1], [5, 7, 6, 1], [6, 8, 4, 1], [7, 9, 2, 1]]],
+    ],
+    rails: [['#e0443c', [[4, 2, 2, 12], [10, 2, 2, 12], [2, 4, 12, 1], [2, 7, 12, 1], [2, 10, 12, 1], [2, 13, 12, 1]]]],
+    ts: [
+      ['#3178c6', [[2, 2, 12, 12]]],
+      ['#ffffff', [[4, 4, 4, 1], [5, 5, 2, 5], [9, 4, 4, 1], [9, 5, 1, 1], [9, 6, 4, 1], [12, 7, 1, 1], [9, 8, 4, 1]]],
+    ],
+    js: [
+      ['#f7df1e', [[2, 2, 12, 12]]],
+      ['#12101c', [[4, 4, 4, 1], [7, 5, 1, 4], [4, 8, 4, 1], [9, 4, 4, 1], [9, 5, 1, 1], [9, 6, 4, 1], [12, 7, 1, 1], [9, 8, 4, 1]]],
+    ],
+  };
+
+  function iconSVG(name) {
+    const layers = ICONS[name];
+    if (!layers) return '';
+    const inner = layers
+      .map(([color, rects]) =>
+        rects.map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${color}"/>`).join(''),
+      )
+      .join('');
+    return `<svg class="sicon" viewBox="0 0 16 16" width="22" height="22" shape-rendering="crispEdges" aria-hidden="true">${inner}</svg>`;
+  }
+
+  function iconGroup(icons) {
+    const list = (icons || []).map(iconSVG).filter(Boolean);
+    if (!list.length) return '';
+    return `<span class="sicogroup">${list.join('')}</span>`;
+  }
+
   const GLYPH = {
     genshin:
       '<rect x="7" y="1" width="2" height="14"/><rect x="1" y="7" width="14" height="2"/>' +
@@ -680,7 +719,7 @@ const DATA = /*__DATA__*/ null;
       .map(
         (s) => `<li class="sitem" style="--c:${esc(s.color || '#a78bfa')}">
           <span class="srole">${esc(L(s, 'role'))}</span>
-          <b>${esc(s.name)}</b>
+          <b>${iconGroup(s.icons)}${esc(s.name)}</b>
           <i>${esc(L(s, 'note'))}</i>
         </li>`,
       )

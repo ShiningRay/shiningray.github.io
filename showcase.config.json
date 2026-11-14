@@ -36,7 +36,10 @@
           "roleEn": "primary",
           "note": "业务系统、gem、服务端都写在这上面。",
           "noteEn": "Business systems, gems, everything server-side.",
-          "color": "#CC342D"
+          "color": "#CC342D",
+          "icons": [
+            "ruby"
+          ]
         },
         {
           "name": "Rails",
@@ -44,7 +47,10 @@
           "roleEn": "framework",
           "note": "Web 应用与 API 的默认选择。",
           "noteEn": "The default choice for web apps and APIs.",
-          "color": "#E0443C"
+          "color": "#E0443C",
+          "icons": [
+            "rails"
+          ]
         },
         {
           "name": "TypeScript · JavaScript",
@@ -52,7 +58,11 @@
           "roleEn": "second",
           "note": "前端、工具链与链上代理。",
           "noteEn": "Front ends, tooling and on-chain proxies.",
-          "color": "#3178C6"
+          "color": "#3178C6",
+          "icons": [
+            "ts",
+            "js"
+          ]
         }
       ]
     }
