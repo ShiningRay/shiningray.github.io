@@ -26,20 +26,21 @@ jobs:
         with:
           node-version: 20
 
-      - name: Fetch repos
-        # GITHUB_TOKEN 查 viewer 会得到 github-actions[bot]（只看得见本仓库），
-        # 所以只有在配了带 public read 的 SHOWCASE_TOKEN 时才重新抓取；
-        # 否则用仓库里已有的 data/repos.json 快照构建，站点不会挂。
-        if: ${{ secrets.SHOWCASE_TOKEN != '' }}
-        run: node scripts/fetch-repos.mjs
+      - name: Fetch repos (可选，需要 SHOWCASE_TOKEN)
+        # GITHUB_TOKEN 查 GraphQL viewer 得到的是 github-actions[bot]（只看得见本仓库），
+        # 所以只有配了带 public read 权限的 SHOWCASE_TOKEN 才重新抓取；
+        # 没配就用仓库里的 data/repos.json 快照构建，站点照常更新。
+        run: |
+          if [ -n "$SHOWCASE_TOKEN" ]; then
+            echo "检测到 SHOWCASE_TOKEN，重新抓取最新数据"
+            node scripts/fetch-repos.mjs
+          else
+            echo "未配置 SHOWCASE_TOKEN，使用仓库内 data/repos.json 快照"
+            node -e "const d=require('./data/repos.json');console.log('快照：'+d.repos.length+' 个公开仓库，抓取于 '+d.generatedAt)"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.SHOWCASE_TOKEN }}
-
-      - name: Use committed snapshot
-        if: ${{ secrets.SHOWCASE_TOKEN == '' }}
-        run: |
-          echo "未配置 SHOWCASE_TOKEN，使用仓库内的 data/repos.json 快照"
-          node -e "const d=require('./data/repos.json');console.log('快照：'+d.repos.length+' 个公开仓库，抓取于 '+d.generatedAt)"
+          SHOWCASE_TOKEN: ${{ secrets.SHOWCASE_TOKEN }}
 
       - name: Build site + profile README
         run: |
