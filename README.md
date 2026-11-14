@@ -114,6 +114,14 @@ git add -A && git commit -m "update: ..." && git push
 
 推送即触发 `.github/workflows/deploy.yml`（构建 → 发布，约 30 秒生效），也可以在 Actions 页手动 `Run workflow`。
 
+主页门面那份 README 在另一个仓库里，同步过去是三条命令：
+
+```bash
+cp dist/README.profile.md ../profile-readme/README.md
+cp dist/README.profile.en.md ../profile-readme/README.en.md
+git -C ../profile-readme commit -am "docs: sync" && git -C ../profile-readme push
+```
+
 ## 数据怎么更新（重要）
 
 - **默认**：Actions 直接用仓库里的 `data/repos.json` 快照构建。所以「新仓库、新 star」不会自己出现，要更新得先在本地 `node scripts/fetch-repos.mjs`，再把 `data/repos.json` 推上去。
