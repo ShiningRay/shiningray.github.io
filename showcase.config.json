@@ -30,9 +30,30 @@
       "note": "业务都长在这两样上：Ruby / Rails 在后端与产品，TypeScript / JavaScript 在前端与工具链。",
       "noteEn": "Most of the business ran on these two: Ruby/Rails on the server and product side, TypeScript/JavaScript on the front end and tooling.",
       "items": [
-        { "name": "Ruby", "role": "主力", "roleEn": "primary", "note": "业务系统、gem、服务端都写在这上面。", "noteEn": "Business systems, gems, everything server-side.", "color": "#CC342D" },
-        { "name": "Rails", "role": "主框架", "roleEn": "framework", "note": "Web 应用与 API 的默认选择。", "noteEn": "The default choice for web apps and APIs.", "color": "#E0443C" },
-        { "name": "TypeScript · JavaScript", "role": "其次", "roleEn": "second", "note": "前端、工具链与链上代理。", "noteEn": "Front ends, tooling and on-chain proxies.", "color": "#3178C6" }
+        {
+          "name": "Ruby",
+          "role": "主力",
+          "roleEn": "primary",
+          "note": "业务系统、gem、服务端都写在这上面。",
+          "noteEn": "Business systems, gems, everything server-side.",
+          "color": "#CC342D"
+        },
+        {
+          "name": "Rails",
+          "role": "主框架",
+          "roleEn": "framework",
+          "note": "Web 应用与 API 的默认选择。",
+          "noteEn": "The default choice for web apps and APIs.",
+          "color": "#E0443C"
+        },
+        {
+          "name": "TypeScript · JavaScript",
+          "role": "其次",
+          "roleEn": "second",
+          "note": "前端、工具链与链上代理。",
+          "noteEn": "Front ends, tooling and on-chain proxies.",
+          "color": "#3178C6"
+        }
       ]
     }
   },
@@ -283,7 +304,9 @@
       "offline": "已下线",
       "seeArchive": "查看当年的样子",
       "archiveSrc": "Wayback Machine",
-      "remains": "今天还剩下"
+      "remains": "今天还剩下",
+      "writing": "写过 · 译过",
+      "writingNote": "写代码之外，也留下过一些字。"
     },
     "en": {
       "eyebrow": "Personal showcase",
@@ -325,7 +348,24 @@
       "offline": "offline",
       "seeArchive": "See how it looked",
       "archiveSrc": "Wayback Machine",
-      "remains": "What's left"
+      "remains": "What's left",
+      "writing": "WRITTEN",
+      "writingNote": "Some words left behind besides the code."
     }
-  }
+  },
+  "writings": [
+    {
+      "id": "professional-javascript",
+      "title": "JavaScript 高级程序设计",
+      "titleEn": "Professional JavaScript for Web Developers",
+      "role": "译者",
+      "roleEn": "Translator",
+      "blurb": "参与过这本书的翻译。它大概是中文世界里最多人读过的 JS 书——很多前端是从这本开始写第一行 console.log 的。",
+      "blurbEn": "I worked on the Chinese translation. For a generation of Chinese front-end developers, this was the book that came before their first console.log.",
+      "meta": "",
+      "metaEn": "",
+      "href": "",
+      "color": "#F0DB4F"
+    }
+  ]
 }

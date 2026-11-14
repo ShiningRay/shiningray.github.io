@@ -10,6 +10,8 @@
 
 **主力技术** · Ruby · Rails · TypeScript · JavaScript
 
+**写过 · 译过** · JavaScript 高级程序设计（译者）
+
 ## 精选
 
 | 项目 | 语言 | 说明 |

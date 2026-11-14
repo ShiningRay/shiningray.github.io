@@ -27,6 +27,7 @@ const COPY = {
     stats: (r, s, l) => `\`${r} 个原创仓库\` · \`${s} stars\` · \`${l} 种语言\``,
     playing: '在玩',
     stack: '主力技术',
+    written: '写过 · 译过',
   },
   en: {
     file: 'README.profile.en.md',
@@ -42,6 +43,7 @@ const COPY = {
     stats: (r, s, l) => `\`${r} original repos\` · \`${s} stars\` · \`${l} languages\``,
     playing: 'Now playing',
     stack: 'Core stack',
+    written: 'Written',
   },
 };
 
@@ -98,6 +100,16 @@ async function main() {
     const stack = site.stack;
     if (stack && (stack.items || []).length) {
       L.push(`**${c.stack}** · ${stack.items.map((s) => s.name).join(' · ')}`, '');
+    }
+    const writings = config.writings || [];
+    if (writings.length) {
+      L.push(
+        `**${c.written}** · ` +
+          writings
+            .map((w) => `${en ? w.titleEn || w.title : w.title}${en ? ' (' + (w.roleEn || w.role) + ')' : '（' + (w.role || '') + '）'}`)
+            .join(' / '),
+        '',
+      );
     }
     L.push(`## ${c.featured}`, '');
     L.push(`| ${c.project} | ${c.language} | ${c.desc} |`);

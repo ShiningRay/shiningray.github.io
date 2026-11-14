@@ -10,6 +10,8 @@
 
 **Core stack** · Ruby · Rails · TypeScript · JavaScript
 
+**Written** · Professional JavaScript for Web Developers (Translator)
+
 ## Featured
 
 | Project | Language | What it is |

@@ -194,6 +194,26 @@ section{margin-top:clamp(46px,7vw,84px)}
 @media (prefers-color-scheme:light){ .srole{color:#fff} }
 @media (max-width:900px){ .stacks{grid-template-columns:1fr} }
 
+/* ============ writing / 写过译过 ============ */
+.writing{margin-top:clamp(46px,7vw,84px)}
+.writing .sec-head h2::before{content:"✎";color:var(--pink);font-size:15px}
+.wcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.wcard{
+  position:relative;display:flex;border:2px solid var(--line2);background:var(--panel);
+  box-shadow:4px 4px 0 var(--shadow);
+  transition:transform .12s steps(2,end), box-shadow .12s steps(2,end);
+}
+.wcard:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--shadow)}
+.wspine{flex:none;width:12px;background:var(--c);box-shadow:inset -4px 0 0 color-mix(in srgb, var(--shadow) 40%, transparent)}
+.wbody{flex:1;min-width:0;padding:16px 18px 15px}
+.wcard h3{margin:0;padding-right:56px;font-size:16.5px;font-weight:800;letter-spacing:-.01em;overflow-wrap:anywhere}
+.wcard h3 a:hover{color:var(--pink)}
+.wcard h3 .wen{display:block;margin-top:5px;font:600 10px/1.45 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.wcard p{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+.wrole{position:absolute;right:0;top:0;padding:3px 6px;background:var(--c);color:#140c1c;font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+@media (prefers-color-scheme:light){ .wrole{color:#fff} }
+.wmeta{margin-top:11px;font:500 10.5px/1.6 var(--mono);color:var(--dim)}
+
 /* ============ featured ============ */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .fcard{
@@ -445,6 +465,16 @@ section{margin-top:clamp(46px,7vw,84px)}
     <div class="lcards" id="lcards"></div>
   </section>
 
+  <section class="writing" id="writing">
+    <div class="sec-head">
+      <h2 data-t="writing"></h2>
+      <span class="sec-count" id="wcount"></span>
+      <span class="sec-line"></span>
+    </div>
+    <p class="lnote" data-t="writingNote"></p>
+    <div class="wcards" id="wcards"></div>
+  </section>
+
   <section id="projects">
     <div class="sec-head">
       <h2 data-t="projects"></h2>
@@ -616,6 +646,33 @@ const DATA = /*__DATA__*/ null;
           <i>${esc(L(s, 'note'))}</i>
         </li>`,
       )
+      .join('');
+  }
+
+/* ---------- 写过 · 译过 ---------- */
+  function paintWritings() {
+    const list = D.writings || [];
+    $('#writing').hidden = !list.length;
+    if (!list.length) return;
+    $('#wcount').textContent = String(list.length).padStart(2, '0');
+    $('#wcards').innerHTML = list
+      .map((x) => {
+        const main = esc(L(x, 'title'));
+        const head = x.href
+          ? `<a href="${esc(x.href)}" target="_blank" rel="noopener">${main}</a>`
+          : main;
+        const sub = lang === 'en' ? x.title : x.titleEn || '';
+        const meta = L(x, 'meta');
+        return `<article class="wcard" style="--c:${esc(x.color || '#f0db4f')}">
+          <span class="wspine" aria-hidden="true"></span>
+          <div class="wbody">
+            <span class="wrole">${esc(L(x, 'role'))}</span>
+            <h3>${head}<span class="wen">${esc(sub)}</span></h3>
+            <p>${esc(L(x, 'blurb'))}</p>
+            ${meta ? `<div class="wmeta">${esc(meta)}</div>` : ''}
+          </div>
+        </article>`;
+      })
       .join('');
   }
 
@@ -806,6 +863,7 @@ const DATA = /*__DATA__*/ null;
     paintText();
     paintStack();
     paintGames();
+    paintWritings();
     paintLegacy();
     paintStats();
     paintControls();
@@ -872,6 +930,7 @@ const DATA = /*__DATA__*/ null;
   paintText();
   paintStack();
   paintGames();
+  paintWritings();
   paintLegacy();
   paintStats();
   paintControls();
